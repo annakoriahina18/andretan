@@ -6,7 +6,7 @@
 <title>ANDRE TAN — Instagram Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Manrope:wght@300;400&family=Inter:wght@400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components.css">
 <link rel="stylesheet" href="docs.css">
@@ -31,7 +31,7 @@
 <!-- ═════════ COVER ═════════ -->
 <section id="cover" class="cover">
   <div class="logo logo--white cover__logo">ANDRE TAN</div>
-  <div class="t-script">Instagram Design System</div>
+  <div class="t-h2-italic">Instagram Design System</div>
   <div class="t-caps-s c-secondary-inverse cover__meta">Contemporary Luxury · v1.0 · 2026</div>
 </section>
 
@@ -42,7 +42,7 @@
   <header><span class="num">01</span><h2>Принципи</h2><p>Естетика модного журналу + чітка комерційна подача. Одяг — головний герой, графіка лише підтримує.</p></header>
   <div class="cols-4">
     <div><h3>Простір</h3><p>Багато повітря. Мінімум 72px полів у стрічці, 80px у Stories. Не заповнюйте кадр текстом.</p></div>
-    <div><h3>Контраст шрифтів</h3><p>Жирний геометричний display — гучні заголовки. Тонкий гротеск — спокійні підзаголовки. Script — лише емоційний акцент в 1–3 слова. Inter — факти: ціна, сезон, CTA.</p></div>
+    <div><h3>Контраст шрифтів</h3><p>Cormorant Garamond — емоція та заголовки. Гротеск великими літерами — факти: ціна, сезон, CTA.</p></div>
     <div><h3>Монохром + акцент</h3><p>Чорний / білий / бежевий як база. Червоний, рожевий, м’ятний, бірюзовий — один акцент на кадр.</p></div>
     <div><h3>Editorial-ритм</h3><p>Фото на весь кадр чергується з текстовими та «журнальними» макетами — сітка профілю читається як журнал.</p></div>
   </div>
@@ -57,13 +57,7 @@
 
 <!-- ═════════ 03 TYPE ═════════ -->
 <section id="type" class="doc-sec">
-  <header><span class="num">03</span><h2>Типографіка</h2><p>Чотири гарнітури з відкритою ліцензією SIL Open Font License 1.1 — безкоштовні для комерційного використання в Instagram, рекламі, на сайті та в друку. Платні Stolzl і Shelley Script замінені безкоштовними аналогами.</p></header>
-  <div class="font-cards">
-    <div><span class="t-caps-s c-accent">Display</span><div class="fc-sample" style="font:700 64px/1 var(--at-font-display);text-transform:uppercase;letter-spacing:-.02em">Aa Бб</div><b>Montserrat Bold</b><p>Замість <s>Stolzl</s> — жирний геометричний гротеск. Великі заголовки, анонси, SALE.</p><small>OFL 1.1 · Google Fonts · кирилиця ✓</small></div>
-    <div><span class="t-caps-s c-accent">Heading</span><div class="fc-sample" style="font:300 64px/1 var(--at-font-heading);letter-spacing:-.02em">Aa Бб</div><b>Manrope Light → Vela Sans</b><p>Тонкий сучасний sans-serif. Vela Sans — похідна від Manrope (теж OFL); поки її файлів немає, показується Manrope Light.</p><small>OFL 1.1 · кирилиця ✓</small></div>
-    <div><span class="t-caps-s c-accent">Body / UI</span><div class="fc-sample" style="font:400 64px/1 var(--at-font-body);letter-spacing:-.02em">Aa Бб</div><b>Inter</b><p>Оригінал зі списку. Основний текст, ціни, мітки, кнопки.</p><small>OFL 1.1 · Google Fonts · кирилиця ✓</small></div>
-    <div><span class="t-caps-s c-accent">Script</span><div class="fc-sample" style="font:400 72px/1 var(--at-font-script)">Aa Бб</div><b>Great Vibes</b><p>Замість <s>Shelley Script</s> — елегантний рукописний. Лише акценти в 1–3 слова, ніколи для довгого тексту.</p><small>OFL 1.1 · Google Fonts · кирилиця ✓</small></div>
-  </div>
+  <header><span class="num">03</span><h2>Типографіка</h2><p>Заголовки — Cormorant Garamond Regular. Основний текст — Beausite Classic Web Regular (поки файлу шрифту немає, підставляється Manrope; покладіть <code>BeausiteClassicWeb-Regular.woff2</code> у <code>design-system/fonts/</code>).</p></header>
   <div id="type-specimen" class="type-list"></div>
 </section>
 
@@ -150,7 +144,7 @@
         <div class="photo" style="width:936px;height:700px"></div>
         <div class="meta-row meta-row--accent" style="margin-top:24px"><span>SS 2027</span><span>ANDRE TAN</span><span>New in</span></div>
         <div class="t-display-l" style="margin-top:56px">Тиша шовку</div>
-        <div class="t-script">нова капсула</div>
+        <div class="t-h2-italic">нова капсула</div>
         <div class="t-body-m c-secondary" style="max-width:760px;margin-top:24px">Легкість, що тримає форму. Шовкові сукні та костюми для теплих вечорів міста.</div>
         <div class="logo logo--sm mt-auto">ANDRE TAN</div>
       </div>
@@ -170,7 +164,7 @@
       <div class="layer pad-feed center">
         <div class="t-caps-s c-secondary-inverse" style="margin-top:148px">ANDRE TAN about</div>
         <div class="grow" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
-          <div class="t-h1" style="max-width:900px;font-size:92px">«Жінка, яка не боїться бути помітною»</div>
+          <div class="t-display-l italic" style="max-width:900px">«Жінка, яка не боїться бути помітною»</div>
           <div class="t-caps-m c-secondary-inverse" style="margin-top:56px">— Андре Тан</div>
         </div>
         <div class="logo logo--white">ANDRE TAN</div>
@@ -183,7 +177,7 @@
         <div class="grow" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
           <div class="t-caps-m c-accent">Анонс колекції</div>
           <div class="t-display-xl" style="margin-top:24px">Скоро</div>
-          <div class="t-script" style="margin-top:28px">Resort 2027</div>
+          <div class="t-h2-italic" style="margin-top:28px">Resort 2027</div>
           <div class="t-caps-m" style="margin-top:64px">15.03.2027 · 19:00 · Київ</div>
         </div>
         <span class="btn btn--outline-dark" style="align-self:center;margin-bottom:40px">Нагадати мені</span>
@@ -200,7 +194,7 @@
       <div class="layer pad-feed center">
         <div class="row between" style="width:100%"><span class="counter" data-cur="01" data-total="05"><i></i></span><span class="logo logo--sm">ANDRE TAN</span></div>
         <div class="t-display-xl" style="margin-top:60px">Лукбук</div>
-        <div class="t-script" style="margin-top:12px">SS 2027 · 12 образів</div>
+        <div class="t-h2-italic" style="margin-top:12px">SS 2027 · 12 образів</div>
         <div class="photo mt-auto" style="width:936px;height:700px"></div>
         <div class="t-caps-s" style="align-self:flex-end;margin-top:40px">Гортайте →</div>
       </div>
@@ -209,7 +203,7 @@
       <div class="photo fill"></div>
       <div class="layer pad-feed c-inverse">
         <span class="counter counter--light" data-cur="02" data-total="05"><i></i></span>
-        <div class="t-script mt-auto">Look 01</div>
+        <div class="t-h2-italic mt-auto">Look 01</div>
         <div class="t-caps-s" style="margin-top:20px">Сукня-сорочка · пояс · мюлі</div>
       </div>
     </div>
@@ -266,7 +260,7 @@
         <div class="t-caps-m c-accent" style="margin-top:72px">Прем’єра колекції</div>
         <div class="t-display-xl" style="margin-top:40px">Resort<br>2027</div>
         <div class="photo" style="width:920px;height:440px;margin-top:56px"></div>
-        <div class="t-script" style="margin-top:40px">15 березня · 19:00</div>
+        <div class="t-h2-italic" style="margin-top:40px">15 березня · 19:00</div>
         <span class="btn btn--outline-light mt-auto" style="align-self:center">Нагадати мені</span>
       </div><div class="safe-zones"><i></i><i></i></div>
     </div>
@@ -287,7 +281,7 @@
       <div class="photo fill"></div><div class="scrim" style="height:1220px"></div>
       <div class="layer pad-story c-inverse">
         <span class="badge badge--red" style="margin-top:20px">до −50%</span>
-        <div class="t-script-l mt-auto">Sale</div>
+        <div class="t-display-xl italic mt-auto" style="margin-left:-6px">Sale</div>
         <div class="t-body-l" style="max-width:820px;margin-top:16px">Фінальні знижки на обрані моделі колекції FW 2026</div>
         <div class="t-caps-l" style="margin-top:32px">16.11 — 01.12</div>
         <span class="btn btn--solid-light" style="margin-top:64px">До розпродажу</span>
@@ -296,9 +290,9 @@
     <div class="canvas c-story bg-beige" data-name="Story / Designer Word">
       <div class="layer pad-story center">
         <div class="t-caps-m c-accent" style="margin-top:20px">Від дизайнера</div>
-        <div class="t-h1" style="max-width:900px;margin-top:72px;font-size:64px">«Ця колекція — про жінку, яка обирає себе. Чисті лінії, натуральні тканини, жодного зайвого жесту.»</div>
+        <div class="t-h1 italic" style="max-width:900px;margin-top:72px">«Ця колекція — про жінку, яка обирає себе. Чисті лінії, натуральні тканини, жодного зайвого жесту.»</div>
         <div class="photo" style="width:440px;height:480px;margin-top:64px"></div>
-        <div class="t-script" style="margin-top:32px">Андре Тан</div>
+        <div class="t-h2-italic" style="margin-top:32px">Андре Тан</div>
         <div class="logo mt-auto">ANDRE TAN</div>
       </div><div class="safe-zones"><i></i><i></i></div>
     </div>
@@ -307,7 +301,7 @@
 
 <!-- ═════════ 04 HIGHLIGHTS ═════════ -->
 <section id="highlights" class="doc-sec wide">
-  <header><span class="num">T4</span><h2>Highlights</h2><p>Одне слово, script Great Vibes, нейтральні фони; акцентні кольори — для сезонних рубрик. Видно лише коло ≈ 600px у центрі.</p></header>
+  <header><span class="num">T4</span><h2>Highlights</h2><p>Одне слово, курсив Cormorant, нейтральні фони; акцентні кольори — для сезонних рубрик. Видно лише коло ≈ 600px у центрі.</p></header>
   <div class="frames">
     <div class="canvas c-story hl-cover hl--black" id="hl-new" data-name="Highlight / New"><span class="hl-cover__title">New</span><span class="hl-cover__rule"></span></div>
     <div class="canvas c-story hl-cover hl--beige" id="hl-looks" data-name="Highlight / Looks"><span class="hl-cover__title">Looks</span><span class="hl-cover__rule"></span></div>

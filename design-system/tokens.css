@@ -101,7 +101,7 @@
    Display — Montserrat Bold  (аналог платного Stolzl)
    Heading — Vela Sans → Manrope Light (Vela — похідна від Manrope, OFL; файли у fonts/ підхопляться самі)
    Body    — Inter
-   Script  — Great Vibes      (аналог платного Shelley Script) */
+   Script  — Ballet           (латиниця; кирилиця → Great Vibes як запасний) */
 @font-face { font-family: "Vela Sans"; src: url("fonts/VelaSans-Light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
 
 :root {
@@ -109,7 +109,7 @@
   --at-post-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --at-post-heading: "Vela Sans", "Manrope", "Helvetica Neue", Arial, sans-serif;
   --at-post-body: "Inter", "Helvetica Neue", Arial, sans-serif;
-  --at-post-script: "Great Vibes", cursive;
+  --at-post-script: "Ballet", "Great Vibes", cursive; /* Great Vibes — лише для кирилиці, якої в Ballet немає */
 }
 .canvas, .post-type { --at-font-body: var(--at-post-body); }
 
@@ -118,7 +118,7 @@
 :is(.canvas, .post-type) .t-h1         { font: 300 80px/1.05 var(--at-post-heading); letter-spacing: -0.02em; }
 :is(.canvas, .post-type) .t-h2         { font: 300 56px/1.10 var(--at-post-heading); letter-spacing: -0.01em; }
 :is(.canvas, .post-type) .t-h3         { font: 300 40px/1.15 var(--at-post-heading); letter-spacing: -0.005em; }
-:is(.canvas, .post-type) .t-h2-italic  { font: 400 72px/1.1 var(--at-post-script); letter-spacing: 0; }
+:is(.canvas, .post-type) .t-h2-italic  { font: 400 96px/1.05 var(--at-post-script); letter-spacing: 0; }
 :is(.canvas, .post-type) .t-script-l   { font: 400 150px/1.0 var(--at-post-script); }
 :is(.canvas, .post-type) .t-body-l     { font: 400 32px/1.45 var(--at-post-body); }
 :is(.canvas, .post-type) .t-body-m     { font: 400 26px/1.45 var(--at-post-body); }
@@ -126,5 +126,7 @@
 :is(.canvas, .post-type) .t-caps-m     { font: 500 20px/1.2 var(--at-post-body); letter-spacing: 0.22em; }
 :is(.canvas, .post-type) .t-caps-s     { font: 500 16px/1.2 var(--at-post-body); letter-spacing: 0.26em; }
 :is(.canvas, .post-type) .t-price      { font: 500 30px/1.2 var(--at-post-body); letter-spacing: 0.02em; }
-/* .italic у постах = script-акцент (Great Vibes) */
+/* .italic у постах = script-акцент (Ballet) */
 :is(.canvas, .post-type) .italic       { font-family: var(--at-post-script); font-style: normal; font-weight: 400; text-transform: none; letter-spacing: 0; }
+/* Ballet: мала x-висота і тонкі волосяні — беремо щільніший оптичний розмір, щоб читалось у стрічці */
+:is(.canvas, .post-type) :is(.t-h2-italic, .t-script-l, .italic) { font-variation-settings: "opsz" 36; }

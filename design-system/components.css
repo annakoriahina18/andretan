@@ -46,22 +46,22 @@
 
 /* ── Logo (тимчасовий wordmark → замінити SVG з брендбуку) ── */
 .logo {
-  font: 400 44px/1.1 var(--at-font-heading); letter-spacing: .30em; white-space: nowrap;
+  font: 600 36px/1.1 var(--at-font-display); letter-spacing: .30em; white-space: nowrap;
   color: var(--at-text-primary); margin-right: -.30em; /* компенсація трекінгу */
 }
 .logo--white { color: var(--at-text-inverse); }
-.logo--sm { font-size: 26px; }
+.logo--sm { font-size: 22px; }
 
 /* ── Meta Row ── */
 .meta-row { display: flex; justify-content: space-between; width: 100%; }
-.meta-row span { font: 400 16px/1.2 var(--at-font-body); letter-spacing: .32em; text-transform: uppercase; }
+.meta-row span { font: 500 16px/1.2 var(--at-font-body); letter-spacing: .26em; text-transform: uppercase; }
 .meta-row--light  { color: var(--at-text-inverse); }
 .meta-row--accent { color: var(--at-accent-red); }
 
 /* ── Button ── */
 .btn {
   display: inline-flex; align-items: center; gap: 16px; padding: 26px 48px; border-radius: var(--at-radius-none);
-  font: 400 20px/1.2 var(--at-font-body); letter-spacing: .28em; text-transform: uppercase;
+  font: 500 20px/1.2 var(--at-font-body); letter-spacing: .22em; text-transform: uppercase;
   border: 1.5px solid transparent; white-space: nowrap; align-self: flex-start;
 }
 .btn::after { content: "→"; }
@@ -84,16 +84,16 @@
 
 /* ── Price Tag ── */
 .price { display: flex; flex-direction: column; gap: 12px; color: var(--at-text-primary); }
-.price__name { font: 400 20px/1.2 var(--at-font-body); letter-spacing: .28em; text-transform: uppercase; }
+.price__name { font: 500 20px/1.2 var(--at-font-body); letter-spacing: .22em; text-transform: uppercase; }
 .price__row { display: flex; align-items: center; gap: 20px; }
-.price__value { font: 400 30px/1.2 var(--at-font-body); letter-spacing: .04em; }
+.price__value { font: 500 30px/1.2 var(--at-font-body); letter-spacing: .02em; }
 .price__old { font: 400 26px/1.45 var(--at-font-body); color: var(--at-text-secondary); text-decoration: line-through; }
 .price--sale .price__value { color: var(--at-accent-red); }
 .price--light { color: var(--at-text-inverse); }
 .price--light .price__old { color: var(--at-text-secondary-inverse); }
 
 /* ── Slide Counter ── */
-.counter { display: inline-flex; align-items: center; gap: 16px; font: 400 16px/1.2 var(--at-font-body); letter-spacing: .32em; }
+.counter { display: inline-flex; align-items: center; gap: 16px; font: 500 16px/1.2 var(--at-font-body); letter-spacing: .26em; }
 .counter::before { content: attr(data-cur); }
 .counter::after { content: attr(data-total); }
 .counter i { width: 48px; height: 1px; background: currentColor; display: block; }
@@ -101,7 +101,7 @@
 
 /* ── Highlight Cover ── */
 .hl-cover { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
-.hl-cover__title { font: italic 400 128px/0.92 var(--at-font-heading); letter-spacing: -0.015em; }
+.hl-cover__title { font: 400 170px/1 var(--at-font-script); }
 .hl-cover__rule { width: 64px; height: 1.5px; background: currentColor; }
 .hl--black { background: var(--at-surface-black); color: var(--at-text-inverse); }
 .hl--white { background: var(--at-surface-white); }

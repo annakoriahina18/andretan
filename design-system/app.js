@@ -18,18 +18,19 @@
 
   /* ── Type specimen ── */
   const types = [
-    ['Display / XL', 't-display-xl', '180 / 90% / −2%', 'New Collection'],
-    ['Display / L', 't-display-l', '128 / 92% / −1.5%', 'New Collection'],
-    ['Heading / H1', 't-h1', '88 / 100% / −1%', 'Elegance in Details'],
-    ['Heading / H2', 't-h2', '60 / 105% / −0.5%', 'Elegance in Details'],
-    ['Heading / H2 Italic', 't-h2-italic', '60 / 105% / −0.5%', 'Elegance in Details'],
-    ['Heading / H3', 't-h3', '44 / 110% / 0', 'Elegance in Details'],
-    ['Body / L', 't-body-l', '32 / 145% / 0', 'Relaxed silk shirt dress with a belt.'],
-    ['Body / M', 't-body-m', '26 / 145% / 0', 'Relaxed silk shirt dress with a belt.'],
-    ['Label / Caps L', 't-caps-l', '24 / 120% / 24%', 'New in · SS 2027'],
-    ['Label / Caps M', 't-caps-m', '20 / 120% / 28%', 'New in · SS 2027'],
-    ['Label / Caps S', 't-caps-s', '16 / 120% / 32%', 'New in · SS 2027'],
-    ['Price', 't-price', '30 / 120% / 4%', '12 900 UAH'],
+    ['Display / XL', 't-display-xl', 'Montserrat Bold · 132 / 95% / −2% · CAPS', 'New Drop'],
+    ['Display / L', 't-display-l', 'Montserrat Bold · 96 / 98% / −1.5% · CAPS', 'New Collection'],
+    ['Heading / H1', 't-h1', 'Vela Sans Light · 80 / 105% / −2%', 'Elegance in Details'],
+    ['Heading / H2', 't-h2', 'Vela Sans Light · 56 / 110% / −1%', 'Elegance in Details'],
+    ['Heading / H3', 't-h3', 'Vela Sans Light · 40 / 115% / −0.5%', 'Elegance in Details'],
+    ['Script / L', 't-script-l', 'Great Vibes · 150 / 100%', 'Sale'],
+    ['Script', 't-script', 'Great Vibes · 72 / 110%', 'new capsule'],
+    ['Body / L', 't-body-l', 'Inter Regular · 32 / 145%', 'Relaxed silk shirt dress with a belt.'],
+    ['Body / M', 't-body-m', 'Inter Regular · 26 / 145%', 'Relaxed silk shirt dress with a belt.'],
+    ['Label / Caps L', 't-caps-l', 'Inter Medium · 24 / 120% / 20%', 'New in · SS 2027'],
+    ['Label / Caps M', 't-caps-m', 'Inter Medium · 20 / 120% / 22%', 'New in · SS 2027'],
+    ['Label / Caps S', 't-caps-s', 'Inter Medium · 16 / 120% / 26%', 'New in · SS 2027'],
+    ['Price', 't-price', 'Inter Medium · 30 / 120% / 2%', '12 900 UAH'],
   ];
   document.getElementById('type-specimen').innerHTML = types.map(([n, c, m, s]) =>
     `<div><small>${n}<br>${m}<br><code>.${c}</code></small><div class="sample ${c}">${s}</div></div>`).join('');

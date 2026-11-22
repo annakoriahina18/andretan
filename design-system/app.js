@@ -63,9 +63,23 @@
   });
 
   /* ── Масштаб і safe zones ── */
+  // Кожне полотно масштабується під ширину екрана: на телефоні — на всю ширину,
+  // на десктопі — за повзунком, але не ширше за контейнер.
   const scale = document.getElementById('scale');
-  const setScale = () => root.style.setProperty('--s', scale.value);
+  const phone = matchMedia('(max-width: 720px)');
+  const setScale = () => {
+    root.style.setProperty('--s', scale.value);
+    document.querySelectorAll('.frames .frame__box').forEach(box => {
+      const w = parseFloat(box.style.getPropertyValue('--w'));
+      const avail = box.closest('.frames').clientWidth;
+      // Highlights на телефоні — по дві в ряд (головне там — одне слово)
+      const cols = phone.matches && box.closest('#highlights') ? 2 : 1;
+      const fit = (avail - (cols - 1) * 24) / cols / w;
+      box.style.setProperty('--s', phone.matches ? Math.min(fit, 0.5) : Math.min(+scale.value, fit));
+    });
+  };
   scale.addEventListener('input', setScale); setScale();
+  let st; addEventListener('resize', () => { clearTimeout(st); st = setTimeout(setScale, 100); });
   document.getElementById('safe').addEventListener('change', e => document.body.classList.toggle('show-safe', e.target.checked));
 
   /* ── Клони для сітки профілю та Highlights ── */

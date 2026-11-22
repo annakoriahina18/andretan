@@ -116,10 +116,68 @@ code { font: 12px/1 ui-monospace, Consolas, monospace; background: rgba(0,0,0,.0
 .lightbox .frame__box { outline: none; }
 .lightbox button { position: absolute; top: 20px; right: 24px; background: none; border: 0; color: #fff; font-size: 28px; cursor: pointer; }
 
+/* ── Планшет ── */
+@media (max-width: 1100px) {
+  .doc { padding: 0 24px 120px; }
+  .doc-sec { padding: 56px 40px; }
+  .topbar { flex-wrap: wrap; row-gap: 10px; }
+  .topbar nav { order: 3; flex-basis: 100%; }
+}
+
+/* ── Телефон ── */
 @media (max-width: 720px) {
-  .doc { padding: 0 16px 96px; }
-  .doc-sec { padding: 40px 20px; }
-  .topbar { flex-wrap: wrap; gap: 12px; padding: 12px 16px; }
-  .controls { width: 100%; }
-  .type-list > div { grid-template-columns: 1fr; gap: 8px; }
+  html { scroll-padding-top: 110px; }
+  body { font-size: 15px; }
+  .topbar { padding: 10px 16px; gap: 10px 16px; }
+  .topbar nav { gap: 16px; padding-bottom: 2px; }
+  .topbar nav a { font-size: 10px; }
+  .controls .scale-ctl { display: none; } /* на телефоні полотна підганяються під ширину автоматично */
+  .controls { margin-left: auto; }
+
+  .cover { height: min(64vh, 520px); min-height: 360px; }
+  .cover__logo { font-size: 30px; }
+  .cover__meta { font-size: 10px; bottom: 24px; }
+
+  .doc { padding: 0 12px 72px; }
+  .doc-sec { margin-top: 24px; padding: 36px 16px; }
+  .doc-sec > header { margin-bottom: 28px; padding-bottom: 20px; }
+  .doc-sec h2 { font-size: 40px; }
+  .doc-sec header p { font-size: 14px; }
+  .cols-4 { gap: 28px; }
+
+  .sw-row { gap: 12px; }
+  .sw { width: calc(50% - 6px); }
+  .sw div { height: 96px; }
+
+  .type-list > div { grid-template-columns: 1fr; gap: 6px; padding: 14px 0; }
+  .type-list .sample { zoom: .42; white-space: normal; }
+
+  .formats { gap: 32px; }
+  .formats > div { width: calc(50% - 16px); }
+  .fmt { max-width: 100%; zoom: .6; }
+  .formats b { font-size: 24px; }
+  .formats p { font-size: 13px; }
+
+  .logo-tiles > div { height: 160px; }
+  .logo-tiles .logo { font-size: 26px; }
+
+  .comp__stage { padding: 20px; gap: 20px; zoom: .55; }
+  .comp h4 { font-size: 12px; line-height: 1.9; }
+
+  .font-cards > div { padding: 20px; }
+
+  .frames { gap: 24px; justify-content: center; }
+  .frames.strip { justify-content: flex-start; scroll-snap-type: x mandatory; }
+  .frames.strip .frame { scroll-snap-align: start; }
+  .frame__label { font-size: 10px; }
+
+  .hl-preview { gap: 16px; justify-content: center; }
+  .profile-wrap { gap: 40px; }
+  .profile__head { padding: 16px; gap: 16px; }
+  .profile__avatar { width: 72px; height: 72px; }
+  .profile__avatar .logo { font-size: 7.5px !important; }
+  .profile .hl-preview { padding: 0 16px 16px; justify-content: flex-start; }
+  .rules { min-width: 0; }
+
+  .lightbox button { top: 8px; right: 12px; }
 }

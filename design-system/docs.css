@@ -47,6 +47,14 @@ code { font: 12px/1 ui-monospace, Consolas, monospace; background: rgba(0,0,0,.0
 .sw small { color: var(--at-text-secondary); font-size: 13px; }
 
 /* type */
+.font-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 48px; }
+.font-cards > div { border: 1px solid var(--at-border-hairline); padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+.fc-role { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--at-accent-red); }
+.fc-sample { margin: 8px 0; white-space: nowrap; }
+.font-cards b { font-weight: 400; font-size: 16px; }
+.font-cards p { font-size: 14px; }
+.font-cards small { font-size: 12px; color: var(--at-text-secondary); margin-top: auto; }
+.post-type small { font-family: var(--at-font-body); }
 .type-list > div { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--at-surface-stone); overflow: hidden; }
 .type-list small code { text-transform: none; letter-spacing: 0; }
 .type-list small { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--at-text-secondary); line-height: 1.8; }

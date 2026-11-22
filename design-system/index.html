@@ -6,7 +6,7 @@
 <title>ANDRE TAN — Instagram Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@300;400&family=Montserrat:wght@700&family=Inter:wght@400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components.css">
 <link rel="stylesheet" href="docs.css">
@@ -59,6 +59,16 @@
 <section id="type" class="doc-sec">
   <header><span class="num">03</span><h2>Типографіка</h2><p>Заголовки — Cormorant Garamond Regular. Основний текст — Beausite Classic Web Regular (поки файлу шрифту немає, підставляється Manrope; покладіть <code>BeausiteClassicWeb-Regular.woff2</code> у <code>design-system/fonts/</code>).</p></header>
   <div id="type-specimen" class="type-list"></div>
+
+  <h4 class="sub" style="margin-top:96px">Шрифти для постів і текстів у них</h4>
+  <p style="max-width:760px;margin-bottom:32px">Використовуються лише всередині макетів (пости, каруселі, Stories, реклама). Усі — з відкритою ліцензією SIL OFL 1.1, безкоштовні для комерційного використання. Платні Stolzl і Shelley Script замінені безкоштовними аналогами.</p>
+  <div class="font-cards">
+    <div><span class="fc-role">Display</span><div class="fc-sample" style="font:700 60px/1 var(--at-post-display);text-transform:uppercase;letter-spacing:-.02em">Aa Бб</div><b>Montserrat Bold</b><p>Замість <s>Stolzl</s> — жирний геометричний гротеск. Великі заголовки, анонси, SALE.</p><small>OFL 1.1 · Google Fonts · кирилиця ✓</small></div>
+    <div><span class="fc-role">Heading</span><div class="fc-sample" style="font:300 60px/1 var(--at-post-heading);letter-spacing:-.02em">Aa Бб</div><b>Vela Sans → Manrope Light</b><p>Тонкий сучасний sans-serif. Vela Sans — похідна від Manrope (теж OFL); поки її файлів немає, показується Manrope Light.</p><small>OFL 1.1 · кирилиця ✓</small></div>
+    <div><span class="fc-role">Body / UI</span><div class="fc-sample" style="font:400 60px/1 var(--at-post-body);letter-spacing:-.02em">Aa Бб</div><b>Inter</b><p>Оригінал зі списку. Текст, ціни, мітки, кнопки в постах.</p><small>OFL 1.1 · Google Fonts · кирилиця ✓</small></div>
+    <div><span class="fc-role">Script</span><div class="fc-sample" style="font:400 68px/1 var(--at-post-script)">Aa Бб</div><b>Great Vibes</b><p>Замість <s>Shelley Script</s> — елегантний рукописний. Лише акценти в 1–3 слова.</p><small>OFL 1.1 · Google Fonts · кирилиця ✓</small></div>
+  </div>
+  <div id="post-type-specimen" class="type-list post-type"></div>
 </section>
 
 <!-- ═════════ 04 FORMATS ═════════ -->
@@ -164,7 +174,7 @@
       <div class="layer pad-feed center">
         <div class="t-caps-s c-secondary-inverse" style="margin-top:148px">ANDRE TAN about</div>
         <div class="grow" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
-          <div class="t-display-l italic" style="max-width:900px">«Жінка, яка не боїться бути помітною»</div>
+          <div class="t-h1" style="max-width:900px;font-size:92px">«Жінка, яка не боїться бути помітною»</div>
           <div class="t-caps-m c-secondary-inverse" style="margin-top:56px">— Андре Тан</div>
         </div>
         <div class="logo logo--white">ANDRE TAN</div>
@@ -281,7 +291,7 @@
       <div class="photo fill"></div><div class="scrim" style="height:1220px"></div>
       <div class="layer pad-story c-inverse">
         <span class="badge badge--red" style="margin-top:20px">до −50%</span>
-        <div class="t-display-xl italic mt-auto" style="margin-left:-6px">Sale</div>
+        <div class="t-script-l mt-auto">Sale</div>
         <div class="t-body-l" style="max-width:820px;margin-top:16px">Фінальні знижки на обрані моделі колекції FW 2026</div>
         <div class="t-caps-l" style="margin-top:32px">16.11 — 01.12</div>
         <span class="btn btn--solid-light" style="margin-top:64px">До розпродажу</span>
@@ -290,7 +300,7 @@
     <div class="canvas c-story bg-beige" data-name="Story / Designer Word">
       <div class="layer pad-story center">
         <div class="t-caps-m c-accent" style="margin-top:20px">Від дизайнера</div>
-        <div class="t-h1 italic" style="max-width:900px;margin-top:72px">«Ця колекція — про жінку, яка обирає себе. Чисті лінії, натуральні тканини, жодного зайвого жесту.»</div>
+        <div class="t-h1" style="max-width:900px;margin-top:72px;font-size:64px">«Ця колекція — про жінку, яка обирає себе. Чисті лінії, натуральні тканини, жодного зайвого жесту.»</div>
         <div class="photo" style="width:440px;height:480px;margin-top:64px"></div>
         <div class="t-h2-italic" style="margin-top:32px">Андре Тан</div>
         <div class="logo mt-auto">ANDRE TAN</div>

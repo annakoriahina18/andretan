@@ -34,6 +34,23 @@
   document.getElementById('type-specimen').innerHTML = types.map(([n, c, m, s]) =>
     `<div><small>${n}<br>${m}<br><code>.${c}</code></small><div class="sample ${c}">${s}</div></div>`).join('');
 
+  /* ── Post type specimen (ті самі класи, але всередині постів) ── */
+  const postTypes = [
+    ['Display / XL', 't-display-xl', 'Montserrat Bold · 132 / 95% · CAPS', 'New Drop'],
+    ['Display / L', 't-display-l', 'Montserrat Bold · 96 / 98% · CAPS', 'New Collection'],
+    ['Heading / H1', 't-h1', 'Vela Sans Light · 80 / 105%', 'Elegance in Details'],
+    ['Heading / H2', 't-h2', 'Vela Sans Light · 56 / 110%', 'Elegance in Details'],
+    ['Heading / H3', 't-h3', 'Vela Sans Light · 40 / 115%', 'Elegance in Details'],
+    ['Script / L', 't-script-l', 'Great Vibes · 150 / 100%', 'Sale'],
+    ['Script (.t-h2-italic)', 't-h2-italic', 'Great Vibes · 72 / 110%', 'new capsule'],
+    ['Body / L', 't-body-l', 'Inter Regular · 32 / 145%', 'Relaxed silk shirt dress with a belt.'],
+    ['Body / M', 't-body-m', 'Inter Regular · 26 / 145%', 'Relaxed silk shirt dress with a belt.'],
+    ['Label / Caps M', 't-caps-m', 'Inter Medium · 20 / 120% / 22%', 'New in · SS 2027'],
+    ['Price', 't-price', 'Inter Medium · 30 / 120%', '12 900 UAH'],
+  ];
+  document.getElementById('post-type-specimen').innerHTML = postTypes.map(([n, c, m, s]) =>
+    `<div><small>${n}<br>${m}<br><code>.${c}</code></small><div class="sample ${c}">${s}</div></div>`).join('');
+
   /* ── Обгортання полотен у масштабовані рамки ── */
   document.querySelectorAll('.frames > .canvas').forEach(cv => {
     const frame = document.createElement('div');

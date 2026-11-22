@@ -93,3 +93,38 @@
 .t-caps-s       { font: 400 16px/1.2 var(--at-font-body); letter-spacing: 0.32em; text-transform: uppercase; }
 .t-price        { font: 400 30px/1.2 var(--at-font-body); letter-spacing: 0.04em; text-transform: uppercase; }
 .italic         { font-style: italic; }
+
+/* ═══════════ Шрифти для постів ═══════════
+   Діють ЛИШЕ всередині макетів (.canvas) та прев'ю (.post-type).
+   Документація і фірмовий стиль лишаються на Cormorant Garamond + Beausite/Manrope.
+   Усі шрифти — SIL OFL 1.1 (безкоштовні для комерції):
+   Display — Montserrat Bold  (аналог платного Stolzl)
+   Heading — Vela Sans → Manrope Light (Vela — похідна від Manrope, OFL; файли у fonts/ підхопляться самі)
+   Body    — Inter
+   Script  — Great Vibes      (аналог платного Shelley Script) */
+@font-face { font-family: "Vela Sans"; src: url("fonts/VelaSans-Light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+
+:root {
+  --at-font-logo: "Cormorant Garamond", "Times New Roman", serif;
+  --at-post-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --at-post-heading: "Vela Sans", "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --at-post-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --at-post-script: "Great Vibes", cursive;
+}
+.canvas, .post-type { --at-font-body: var(--at-post-body); }
+
+:is(.canvas, .post-type) .t-display-xl { font: 700 132px/0.95 var(--at-post-display); letter-spacing: -0.02em; text-transform: uppercase; }
+:is(.canvas, .post-type) .t-display-l  { font: 700 96px/0.98 var(--at-post-display); letter-spacing: -0.015em; text-transform: uppercase; }
+:is(.canvas, .post-type) .t-h1         { font: 300 80px/1.05 var(--at-post-heading); letter-spacing: -0.02em; }
+:is(.canvas, .post-type) .t-h2         { font: 300 56px/1.10 var(--at-post-heading); letter-spacing: -0.01em; }
+:is(.canvas, .post-type) .t-h3         { font: 300 40px/1.15 var(--at-post-heading); letter-spacing: -0.005em; }
+:is(.canvas, .post-type) .t-h2-italic  { font: 400 72px/1.1 var(--at-post-script); letter-spacing: 0; }
+:is(.canvas, .post-type) .t-script-l   { font: 400 150px/1.0 var(--at-post-script); }
+:is(.canvas, .post-type) .t-body-l     { font: 400 32px/1.45 var(--at-post-body); }
+:is(.canvas, .post-type) .t-body-m     { font: 400 26px/1.45 var(--at-post-body); }
+:is(.canvas, .post-type) .t-caps-l     { font: 500 24px/1.2 var(--at-post-body); letter-spacing: 0.2em; }
+:is(.canvas, .post-type) .t-caps-m     { font: 500 20px/1.2 var(--at-post-body); letter-spacing: 0.22em; }
+:is(.canvas, .post-type) .t-caps-s     { font: 500 16px/1.2 var(--at-post-body); letter-spacing: 0.26em; }
+:is(.canvas, .post-type) .t-price      { font: 500 30px/1.2 var(--at-post-body); letter-spacing: 0.02em; }
+/* .italic у постах = script-акцент (Great Vibes) */
+:is(.canvas, .post-type) .italic       { font-family: var(--at-post-script); font-style: normal; font-weight: 400; text-transform: none; letter-spacing: 0; }

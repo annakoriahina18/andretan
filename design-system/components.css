@@ -46,7 +46,7 @@
 
 /* ── Logo (тимчасовий wordmark → замінити SVG з брендбуку) ── */
 .logo {
-  font: 400 44px/1.1 var(--at-font-heading); letter-spacing: .30em; white-space: nowrap;
+  font: 400 44px/1.1 var(--at-font-logo); letter-spacing: .30em; white-space: nowrap;
   color: var(--at-text-primary); margin-right: -.30em; /* компенсація трекінгу */
 }
 .logo--white { color: var(--at-text-inverse); }

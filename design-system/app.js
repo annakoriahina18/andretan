@@ -18,14 +18,14 @@
 
   /* ── Type specimen ── */
   const types = [
-    ['Display / XL', 't-display-xl', '180 / 90% / −2%', 'Нова колекція'],
-    ['Display / L', 't-display-l', '128 / 92% / −1.5%', 'Нова колекція'],
-    ['Heading / H1', 't-h1', '88 / 100% / −1%', 'Елегантність у деталях'],
-    ['Heading / H2', 't-h2', '60 / 105% / −0.5%', 'Елегантність у деталях'],
-    ['Heading / H2 Italic', 't-h2-italic', '60 / 105% / −0.5%', 'Елегантність у деталях'],
-    ['Heading / H3', 't-h3', '44 / 110% / 0', 'Елегантність у деталях'],
-    ['Body / L', 't-body-l', '32 / 145% / 0', 'Шовкова сукня-сорочка вільного крою з поясом.'],
-    ['Body / M', 't-body-m', '26 / 145% / 0', 'Шовкова сукня-сорочка вільного крою з поясом.'],
+    ['Display / XL', 't-display-xl', '180 / 90% / −2%', 'New Collection'],
+    ['Display / L', 't-display-l', '128 / 92% / −1.5%', 'New Collection'],
+    ['Heading / H1', 't-h1', '88 / 100% / −1%', 'Elegance in Details'],
+    ['Heading / H2', 't-h2', '60 / 105% / −0.5%', 'Elegance in Details'],
+    ['Heading / H2 Italic', 't-h2-italic', '60 / 105% / −0.5%', 'Elegance in Details'],
+    ['Heading / H3', 't-h3', '44 / 110% / 0', 'Elegance in Details'],
+    ['Body / L', 't-body-l', '32 / 145% / 0', 'Relaxed silk shirt dress with a belt.'],
+    ['Body / M', 't-body-m', '26 / 145% / 0', 'Relaxed silk shirt dress with a belt.'],
     ['Label / Caps L', 't-caps-l', '24 / 120% / 24%', 'New in · SS 2027'],
     ['Label / Caps M', 't-caps-m', '20 / 120% / 28%', 'New in · SS 2027'],
     ['Label / Caps S', 't-caps-s', '16 / 120% / 32%', 'New in · SS 2027'],

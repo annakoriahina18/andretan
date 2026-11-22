@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANDRE TAN — Готові пости</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="docs.css">
+<link rel="stylesheet" href="published.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="topbar__logo">ANDRE TAN</a>
+  <nav>
+    <a href="index.html">Дизайн-система</a>
+    <span class="sep"></span>
+    <a href="published.html" class="is-active">Готові пости</a>
+  </nav>
+  <div class="controls"><button class="pub-btn pub-btn--dark" id="dl-all">Завантажити все</button></div>
+</header>
+
+<main class="doc">
+  <section class="doc-sec wide">
+    <header><span class="num">Публікації</span><h2>Готові пости</h2>
+      <p>Фінальні макети, зібрані з шаблонів дизайн-системи. PNG — точний розмір полотна для Instagram, JPG — легша копія. Підпис до поста копіюється однією кнопкою.</p></header>
+    <div class="pub-grid" id="pub-grid"></div>
+  </section>
+</main>
+
+<script src="posts/posts.js"></script>
+<script src="published.js"></script>
+</body>
+</html>

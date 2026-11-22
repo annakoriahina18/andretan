@@ -1,0 +1,24 @@
+/* Сторінка «Готові пости» */
+.topbar nav a.is-active { color: var(--at-text-primary); }
+
+.pub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 48px 40px; }
+.pub-card { display: flex; flex-direction: column; gap: 16px; }
+.pub-card__img { display: block; width: 100%; background: var(--at-surface-stone); border: 1px solid var(--at-border-hairline); }
+.pub-card__img img { display: block; width: 100%; height: auto; }
+.pub-card__meta { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--at-text-secondary); display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.pub-card__meta b { font-weight: 400; color: var(--at-accent-red); }
+.pub-card h3 { margin: 0; }
+.pub-card__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.pub-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 18px; min-height: 44px;
+  font: 400 11px/1 var(--at-font-body); letter-spacing: .2em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+  background: transparent; color: var(--at-text-primary); border: 1px solid var(--at-border-strong); border-radius: 0;
+}
+.pub-btn:hover { background: var(--at-surface-stone); }
+.pub-btn--dark { background: var(--at-surface-black); color: var(--at-text-inverse); }
+.pub-btn--dark:hover { background: var(--at-ink-900); }
+.pub-btn:focus-visible { outline: 2px solid var(--at-accent-red); outline-offset: 2px; }
+.pub-empty { color: var(--at-text-secondary); }
+
+@media (max-width: 720px) { .pub-grid { grid-template-columns: 1fr; } }

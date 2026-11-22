@@ -1,7 +1,18 @@
 /* ANDRE TAN — тема з редактора. Порожня = все як у tokens.css.
    Файл генерує редактор (editor/), вручну не редагуйте.
-   editor-state: {"vars":{},"fonts":{"script":{"family":"Pinyon Script","weight":400}}} */
-@import url("https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&display=swap");
+   editor-state: {"vars":{"--at-margin-story":"51px","--at-post-size-caps-l":"26px","--at-post-size-caps-m":"22px","--at-post-size-price":"52px","--at-post-size-script":"70px","--at-red-600":"#C1121C"},"fonts":{"capsl":{"family":"Cormorant Garamond","weight":400},"caption":{"family":"Manrope","weight":300},"price":{"family":"Cormorant Garamond","weight":400}}} */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Manrope:wght@300&display=swap");
 :root {
-  --at-post-script: "Pinyon Script", "Great Vibes", cursive;
+  --at-margin-story: 51px;
+  --at-post-size-caps-l: 26px;
+  --at-post-size-caps-m: 22px;
+  --at-post-size-price: 52px;
+  --at-post-size-script: 70px;
+  --at-red-600: #C1121C;
+  --at-post-caps-l: "Cormorant Garamond", "Times New Roman", serif;
+  --at-post-caps-l-weight: 400;
+  --at-post-caption: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --at-post-caption-weight: 300;
+  --at-post-price: "Cormorant Garamond", "Times New Roman", serif;
+  --at-post-price-weight: 400;
 }

@@ -2,16 +2,6 @@
    Дзеркало змінних Figma (Primitives / Brand / Layout / Typography).
    HEX-значення робочі — звірити з офіційним брендбуком. */
 
-@font-face {
-  font-family: "Beausite Classic Web";
-  src: local("Beausite Classic Web"), local("BeausiteClassicWeb-Regular"),
-       url("fonts/BeausiteClassicWeb-Regular.woff2") format("woff2"),
-       url("fonts/BeausiteClassicWeb-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* ── Primitives ── */
   --at-black: #000000;
@@ -73,7 +63,7 @@
 
   /* ── Typography ── */
   --at-font-heading: "Cormorant Garamond", "Times New Roman", serif;
-  --at-font-body: "Beausite Classic Web", "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --at-font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
 
   /* ── Overlay ── */
   --at-scrim-bottom: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%);
@@ -96,24 +86,34 @@
 
 /* ═══════════ Шрифти для постів ═══════════
    Діють ЛИШЕ всередині макетів (.canvas) та прев'ю (.post-type).
-   Документація і фірмовий стиль лишаються на Cormorant Garamond + Beausite/Manrope.
+   Документація і фірмовий стиль — Cormorant Garamond Regular + Manrope.
    Усі шрифти — SIL OFL 1.1 (безкоштовні для комерції):
    Display — Montserrat Bold  (аналог платного Stolzl)
    Heading — Vela Sans → Manrope Light (Vela — похідна від Manrope, OFL; файли у fonts/ підхопляться самі)
-   Body    — Inter
-   Script  — Ballet           (латиниця; кирилиця → Great Vibes як запасний) */
+   Body    — Manrope
+   Script  — Ballet           (латиниця; кирилиця → Cormorant Garamond як запасний)
+   Script 2 — Imperial Script (вмикається в редакторі; кирилиця → Cormorant Garamond)
+   Дозволений набір шрифтів DS (2026-11-22): Cormorant Garamond Regular, Montserrat Bold,
+   Manrope, Vela Sans, Ballet, Imperial Script. Інших не додавати. */
 @font-face { font-family: "Vela Sans"; src: url("fonts/VelaSans-Light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
 
 :root {
   --at-font-logo: "Cormorant Garamond", "Times New Roman", serif;
   --at-post-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --at-post-heading: "Vela Sans", "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --at-post-body: "Inter", "Helvetica Neue", Arial, sans-serif;
-  --at-post-script: "Ballet", "Great Vibes", cursive; /* Great Vibes — лише для кирилиці, якої в Ballet немає */
+  --at-post-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  /* Окремі шрифти для рядків великими літерами і для ціни — редагуються в редакторі незалежно від Body */
+  --at-post-caps-l: "Manrope", "Helvetica Neue", Arial, sans-serif;   /* Caps L — акцентні рядки, назви */
+  --at-post-caption: "Manrope", "Helvetica Neue", Arial, sans-serif;  /* Caps M / S — підписи, дати */
+  --at-post-price: "Manrope", "Helvetica Neue", Arial, sans-serif;    /* ціни */
+  --at-post-script: "Ballet", "Cormorant Garamond", cursive; /* Cormorant — лише для кирилиці, якої в Ballet немає */
 
   /* Товщини, регістр і розміри (полотно 1080px) — їх змінює редактор через theme.css */
   --at-post-display-weight: 700;
   --at-post-heading-weight: 300;
+  --at-post-caps-l-weight: 500;
+  --at-post-caption-weight: 500;
+  --at-post-price-weight: 500;
   --at-post-display-case: uppercase;
   --at-post-size-display-xl: 132px;
   --at-post-size-display-l: 96px;
@@ -124,11 +124,16 @@
   --at-post-size-script-l: 150px;
   --at-post-size-body-l: 32px;
   --at-post-size-body-m: 26px;
+  --at-post-size-caps-l: 24px;
+  --at-post-size-caps-m: 20px;
+  --at-post-size-caps-s: 16px;
+  --at-post-size-price: 30px;
+  --at-post-size-logo: 44px;
 }
 .canvas, .post-type { --at-font-body: var(--at-post-body); }
 
-:is(.canvas, .post-type) .t-display-xl { font: var(--at-post-display-weight) var(--at-post-size-display-xl)/0.95 var(--at-post-display); letter-spacing: -0.02em; text-transform: var(--at-post-display-case); }
-:is(.canvas, .post-type) .t-display-l  { font: var(--at-post-display-weight) var(--at-post-size-display-l)/0.98 var(--at-post-display); letter-spacing: -0.015em; text-transform: var(--at-post-display-case); }
+:is(.canvas, .post-type) .t-display-xl { font: var(--at-post-display-weight) var(--at-post-size-display-xl)/1.0 var(--at-post-display); letter-spacing: -0.02em; text-transform: var(--at-post-display-case); }
+:is(.canvas, .post-type) .t-display-l  { font: var(--at-post-display-weight) var(--at-post-size-display-l)/1.0 var(--at-post-display); letter-spacing: -0.015em; text-transform: var(--at-post-display-case); }
 :is(.canvas, .post-type) .t-h1         { font: var(--at-post-heading-weight) var(--at-post-size-h1)/1.05 var(--at-post-heading); letter-spacing: -0.02em; }
 :is(.canvas, .post-type) .t-h2         { font: var(--at-post-heading-weight) var(--at-post-size-h2)/1.10 var(--at-post-heading); letter-spacing: -0.01em; }
 :is(.canvas, .post-type) .t-h3         { font: var(--at-post-heading-weight) var(--at-post-size-h3)/1.15 var(--at-post-heading); letter-spacing: -0.005em; }
@@ -136,11 +141,27 @@
 :is(.canvas, .post-type) .t-script-l   { font: 400 var(--at-post-size-script-l)/1.0 var(--at-post-script); }
 :is(.canvas, .post-type) .t-body-l     { font: 400 var(--at-post-size-body-l)/1.45 var(--at-post-body); }
 :is(.canvas, .post-type) .t-body-m     { font: 400 var(--at-post-size-body-m)/1.45 var(--at-post-body); }
-:is(.canvas, .post-type) .t-caps-l     { font: 500 24px/1.2 var(--at-post-body); letter-spacing: 0.2em; }
-:is(.canvas, .post-type) .t-caps-m     { font: 500 20px/1.2 var(--at-post-body); letter-spacing: 0.22em; }
-:is(.canvas, .post-type) .t-caps-s     { font: 500 16px/1.2 var(--at-post-body); letter-spacing: 0.26em; }
-:is(.canvas, .post-type) .t-price      { font: 500 30px/1.2 var(--at-post-body); letter-spacing: 0.02em; }
+:is(.canvas, .post-type) .t-caps-l     { font: var(--at-post-caps-l-weight) var(--at-post-size-caps-l)/1.2 var(--at-post-caps-l); letter-spacing: 0.2em; }
+:is(.canvas, .post-type) .t-caps-m     { font: var(--at-post-caption-weight) var(--at-post-size-caps-m)/1.2 var(--at-post-caption); letter-spacing: 0.22em; }
+:is(.canvas, .post-type) .t-caps-s     { font: var(--at-post-caption-weight) var(--at-post-size-caps-s)/1.2 var(--at-post-caption); letter-spacing: 0.26em; }
+:is(.canvas, .post-type) .t-price      { font: var(--at-post-price-weight) var(--at-post-size-price)/1.2 var(--at-post-price); letter-spacing: 0.02em; }
+:is(.canvas, .post-type) .price__value { font-size: var(--at-post-size-price); font-family: var(--at-post-price); }
+:is(.canvas, .post-type) .price-chip   { font-family: var(--at-post-price); font-weight: var(--at-post-price-weight); }
+:is(.canvas, .post-type) .price-chip   { font-size: calc(var(--at-post-size-price) * 1.13); }
+/* Компоненти всередині постів теж керуються з редактора — у постах немає тексту з фіксованим шрифтом */
+:is(.canvas, .post-type) .price__name { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); }
+:is(.canvas, .post-type) .price__old  { font-family: var(--at-post-price); font-size: calc(var(--at-post-size-price) * 0.87); }
+:is(.canvas, .post-type) :is(.meta-row span, .badge, .counter) { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-s); }
+:is(.canvas, .post-type) .logo        { font-size: var(--at-post-size-logo); }
+:is(.canvas, .post-type) .logo--sm    { font-size: calc(var(--at-post-size-logo) * 0.59); }
+:is(.canvas, .post-type) .disc-circle { font-family: var(--at-post-display); font-size: calc(var(--at-post-size-display-l) * 0.54); }
+:is(.canvas, .post-type) .btn         { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); }
+:is(.canvas, .post-type) .hl-cover__title { font-family: var(--at-font-logo); font-size: calc(var(--at-post-size-logo) * 2.9); }
 /* .italic у постах = script-акцент (Ballet) */
 :is(.canvas, .post-type) .italic       { font-family: var(--at-post-script); font-style: normal; font-weight: 400; text-transform: none; letter-spacing: 0; }
 /* Ballet: мала x-висота і тонкі волосяні — беремо щільніший оптичний розмір, щоб читалось у стрічці */
 :is(.canvas, .post-type) :is(.t-h2-italic, .t-script-l, .italic) { font-variation-settings: "opsz" 36; }
+/* Запас для розчерків рукописних шрифтів (Ballet, Imperial Script): блок стає вищим на 0.15em
+   згори й знизу, тому розчерки не налазять на сусідні рядки. */
+:is(.canvas, .post-type) .t-h2-italic { padding-block: 0.2em; }
+:is(.canvas, .post-type) .t-script-l  { padding-block: 0.35em; }

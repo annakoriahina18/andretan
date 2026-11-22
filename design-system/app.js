@@ -43,10 +43,10 @@
     ['Heading / H3', 't-h3', 'Vela Sans Light · 40 / 115%', 'Elegance in Details'],
     ['Script / L', 't-script-l', 'Ballet · 150 / 100%', 'Sale'],
     ['Script (.t-h2-italic)', 't-h2-italic', 'Ballet · 96 / 105%', 'new capsule'],
-    ['Body / L', 't-body-l', 'Inter Regular · 32 / 145%', 'Relaxed silk shirt dress with a belt.'],
-    ['Body / M', 't-body-m', 'Inter Regular · 26 / 145%', 'Relaxed silk shirt dress with a belt.'],
-    ['Label / Caps M', 't-caps-m', 'Inter Medium · 20 / 120% / 22%', 'New in · SS 2027'],
-    ['Price', 't-price', 'Inter Medium · 30 / 120%', '12 900 UAH'],
+    ['Body / L', 't-body-l', 'Manrope Regular · 32 / 145%', 'Relaxed silk shirt dress with a belt.'],
+    ['Body / M', 't-body-m', 'Manrope Regular · 26 / 145%', 'Relaxed silk shirt dress with a belt.'],
+    ['Label / Caps M', 't-caps-m', 'Manrope Medium · 20 / 120% / 22%', 'New in · SS 2027'],
+    ['Price', 't-price', 'Manrope Medium · 30 / 120%', '12 900 UAH'],
   ];
   document.getElementById('post-type-specimen').innerHTML = postTypes.map(([n, c, m, s]) =>
     `<div><small>${n}<br>${m}<br><code>.${c}</code></small><div class="sample ${c}">${s}</div></div>`).join('');

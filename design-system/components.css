@@ -29,6 +29,22 @@
 .row.between { justify-content: space-between; }
 .mt-auto { margin-top: auto; }
 
+/* ── Stack: вертикальний ритм без накладань ──
+   Відступи між текстами — лише через gap (не через відʼємні margin), тож елементи
+   ніколи не заходять один на одного. Крок — зі шкали --at-space-*. */
+.stack { display: flex; flex-direction: column; gap: var(--gap, var(--at-space-24)); }
+.stack > :not(.mt-auto) { margin-top: 0; margin-bottom: 0; }
+.gap-8  { --gap: var(--at-space-8); }
+.gap-16 { --gap: var(--at-space-16); }
+.gap-24 { --gap: var(--at-space-24); }
+.gap-32 { --gap: var(--at-space-32); }
+.gap-48 { --gap: var(--at-space-48); }
+.gap-64 { --gap: var(--at-space-64); }
+.end { align-items: flex-end; text-align: right; }
+/* ціна-плашка (червоний прямокутник під назвою) і кругла знижка */
+.price-chip { display: inline-block; align-self: flex-start; padding: 10px 22px; background: var(--at-accent-red); color: var(--at-text-inverse); font: 500 34px/1.2 var(--at-font-body); letter-spacing: .02em; }
+.disc-circle { position: absolute; width: 184px; height: 184px; border-radius: 50%; background: var(--at-accent-red); color: var(--at-text-inverse); display: flex; align-items: center; justify-content: center; font: 700 52px/1 var(--at-post-display); letter-spacing: -.01em; }
+
 /* ── Photo placeholder ── */
 .photo {
   position: relative; background: var(--at-surface-photo) center / cover no-repeat;

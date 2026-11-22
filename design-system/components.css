@@ -1,0 +1,119 @@
+/* ANDRE TAN — Components (дзеркало сторінки Components у Figma) */
+
+/* ── Canvas (полотна 1:1 для експорту) ── */
+.canvas { position: relative; overflow: hidden; flex: none; color: var(--at-text-primary); }
+.c-post   { width: 1080px; height: 1350px; }
+.c-story  { width: 1080px; height: 1920px; }
+.c-square { width: 1080px; height: 1080px; }
+
+.bg-white { background: var(--at-surface-white); }
+.bg-black { background: var(--at-surface-black); color: var(--at-text-inverse); }
+.bg-beige { background: var(--at-surface-beige); }
+.bg-beige-deep { background: var(--at-surface-beige-deep); }
+.bg-blush { background: var(--at-surface-blush); }
+.bg-mint  { background: var(--at-surface-mint); }
+
+.c-inverse { color: var(--at-text-inverse); }
+.c-secondary { color: var(--at-text-secondary); }
+.c-secondary-inverse { color: var(--at-text-secondary-inverse); }
+.c-accent { color: var(--at-accent-red); }
+
+/* шар контенту з полями */
+.layer { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.pad-feed  { padding: var(--at-margin-feed); }
+.pad-story { padding: var(--at-safe-story-top) var(--at-margin-story) var(--at-safe-story-bottom); }
+.center { align-items: center; text-align: center; }
+.between { justify-content: space-between; }
+.grow { flex: 1; }
+.row { display: flex; align-items: center; }
+.row.between { justify-content: space-between; }
+.mt-auto { margin-top: auto; }
+
+/* ── Photo placeholder ── */
+.photo {
+  position: relative; background: var(--at-surface-photo) center / cover no-repeat;
+  display: flex; align-items: center; justify-content: center; flex: none;
+}
+.photo::after {
+  content: "Фото · перетягніть зображення"; font: 400 16px/1.2 var(--at-font-body);
+  letter-spacing: .32em; text-transform: uppercase; color: var(--at-text-secondary);
+}
+.photo.has-image::after { content: none; }
+.photo.fill { position: absolute; inset: 0; }
+.photo.drop-hover { outline: 6px solid var(--at-accent-red); outline-offset: -6px; }
+
+.scrim { position: absolute; left: 0; right: 0; bottom: 0; background: var(--at-scrim-bottom); }
+
+/* ── Logo (тимчасовий wordmark → замінити SVG з брендбуку) ── */
+.logo {
+  font: 400 44px/1.1 var(--at-font-heading); letter-spacing: .30em; white-space: nowrap;
+  color: var(--at-text-primary); margin-right: -.30em; /* компенсація трекінгу */
+}
+.logo--white { color: var(--at-text-inverse); }
+.logo--sm { font-size: 26px; }
+
+/* ── Meta Row ── */
+.meta-row { display: flex; justify-content: space-between; width: 100%; }
+.meta-row span { font: 400 16px/1.2 var(--at-font-body); letter-spacing: .32em; text-transform: uppercase; }
+.meta-row--light  { color: var(--at-text-inverse); }
+.meta-row--accent { color: var(--at-accent-red); }
+
+/* ── Button ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 16px; padding: 26px 48px; border-radius: var(--at-radius-none);
+  font: 400 20px/1.2 var(--at-font-body); letter-spacing: .28em; text-transform: uppercase;
+  border: 1.5px solid transparent; white-space: nowrap; align-self: flex-start;
+}
+.btn::after { content: "→"; }
+.btn.no-arrow::after { content: none; }
+.btn--solid-dark    { background: var(--at-surface-black); color: var(--at-text-inverse); }
+.btn--solid-light   { background: var(--at-surface-white); color: var(--at-text-primary); }
+.btn--outline-dark  { border-color: var(--at-border-strong); color: var(--at-text-primary); }
+.btn--outline-light { border-color: var(--at-border-inverse); color: var(--at-text-inverse); }
+
+/* ── Badge ── */
+.badge {
+  display: inline-block; padding: 12px 20px; font: 400 16px/1.2 var(--at-font-body);
+  letter-spacing: .32em; text-transform: uppercase; border: 1px solid transparent; align-self: flex-start;
+}
+.badge--outline-dark  { border-color: var(--at-border-strong); color: var(--at-text-primary); }
+.badge--outline-light { border-color: var(--at-border-inverse); color: var(--at-text-inverse); }
+.badge--black { background: var(--at-surface-black); color: var(--at-text-inverse); }
+.badge--red   { background: var(--at-accent-red); color: var(--at-text-inverse); }
+.badge--white { background: var(--at-surface-white); color: var(--at-text-primary); }
+
+/* ── Price Tag ── */
+.price { display: flex; flex-direction: column; gap: 12px; color: var(--at-text-primary); }
+.price__name { font: 400 20px/1.2 var(--at-font-body); letter-spacing: .28em; text-transform: uppercase; }
+.price__row { display: flex; align-items: center; gap: 20px; }
+.price__value { font: 400 30px/1.2 var(--at-font-body); letter-spacing: .04em; }
+.price__old { font: 400 26px/1.45 var(--at-font-body); color: var(--at-text-secondary); text-decoration: line-through; }
+.price--sale .price__value { color: var(--at-accent-red); }
+.price--light { color: var(--at-text-inverse); }
+.price--light .price__old { color: var(--at-text-secondary-inverse); }
+
+/* ── Slide Counter ── */
+.counter { display: inline-flex; align-items: center; gap: 16px; font: 400 16px/1.2 var(--at-font-body); letter-spacing: .32em; }
+.counter::before { content: attr(data-cur); }
+.counter::after { content: attr(data-total); }
+.counter i { width: 48px; height: 1px; background: currentColor; display: block; }
+.counter--light { color: var(--at-text-inverse); }
+
+/* ── Highlight Cover ── */
+.hl-cover { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+.hl-cover__title { font: italic 400 128px/0.92 var(--at-font-heading); letter-spacing: -0.015em; }
+.hl-cover__rule { width: 64px; height: 1.5px; background: currentColor; }
+.hl--black { background: var(--at-surface-black); color: var(--at-text-inverse); }
+.hl--white { background: var(--at-surface-white); }
+.hl--beige { background: var(--at-surface-beige-deep); }
+.hl--blush { background: var(--at-surface-blush); }
+.hl--mint  { background: var(--at-surface-mint); }
+
+/* ── Story Safe Zones ── */
+.safe-zones { position: absolute; inset: 0; pointer-events: none; display: none; z-index: 10; }
+.show-safe .safe-zones { display: block; }
+.safe-zones::before, .safe-zones::after { content: ""; position: absolute; left: 0; right: 0; background: rgba(179,18,29,.14); }
+.safe-zones::before { top: 0; height: var(--at-safe-story-top); }
+.safe-zones::after  { bottom: 0; height: var(--at-safe-story-bottom); }
+.safe-zones i { position: absolute; top: 0; bottom: 0; width: var(--at-margin-story); background: rgba(179,18,29,.07); }
+.safe-zones i:first-child { left: 0; } .safe-zones i:last-child { right: 0; }

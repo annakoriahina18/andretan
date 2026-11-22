@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANDRE TAN — Instagram Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="#cover" class="topbar__logo">ANDRE TAN</a>
+  <nav>
+    <a href="#principles">Принципи</a><a href="#colors">Колір</a><a href="#type">Типографіка</a><a href="#formats">Формати</a><a href="#logo">Логотип</a>
+    <span class="sep"></span>
+    <a href="#components">Компоненти</a>
+    <span class="sep"></span>
+    <a href="#posts">Пости</a><a href="#carousel">Карусель</a><a href="#stories">Stories</a><a href="#highlights">Highlights</a><a href="#ads">Реклама</a><a href="#grid">Сітка</a>
+  </nav>
+  <div class="controls">
+    <label>Масштаб <input id="scale" type="range" min="0.15" max="0.6" step="0.01" value="0.3"></label>
+    <label><input id="safe" type="checkbox"> Safe zones</label>
+  </div>
+</header>
+
+<!-- ═════════ COVER ═════════ -->
+<section id="cover" class="cover">
+  <div class="logo logo--white cover__logo">ANDRE TAN</div>
+  <div class="t-h2-italic">Instagram Design System</div>
+  <div class="t-caps-s c-secondary-inverse cover__meta">Contemporary Luxury · v1.0 · 2026</div>
+</section>
+
+<main class="doc">
+
+<!-- ═════════ 01 PRINCIPLES ═════════ -->
+<section id="principles" class="doc-sec">
+  <header><span class="num">01</span><h2>Принципи</h2><p>Естетика модного журналу + чітка комерційна подача. Одяг — головний герой, графіка лише підтримує.</p></header>
+  <div class="cols-4">
+    <div><h3>Простір</h3><p>Багато повітря. Мінімум 72px полів у стрічці, 80px у Stories. Не заповнюйте кадр текстом.</p></div>
+    <div><h3>Контраст шрифтів</h3><p>Cormorant Garamond — емоція та заголовки. Гротеск великими літерами — факти: ціна, сезон, CTA.</p></div>
+    <div><h3>Монохром + акцент</h3><p>Чорний / білий / бежевий як база. Червоний, рожевий, м’ятний, бірюзовий — один акцент на кадр.</p></div>
+    <div><h3>Editorial-ритм</h3><p>Фото на весь кадр чергується з текстовими та «журнальними» макетами — сітка профілю читається як журнал.</p></div>
+  </div>
+</section>
+
+<!-- ═════════ 02 COLORS ═════════ -->
+<section id="colors" class="doc-sec">
+  <header><span class="num">02</span><h2>Колір</h2><p>HEX-значення — робочі. Звірте з брендбуком і змініть їх у <code>tokens.css</code> — оновиться все.</p></header>
+  <div id="swatches"></div>
+  <p class="note">Пропорція в кадрі: 70% нейтральні (фото, білий, чорний, бежевий) · 25% текст · ≤ 5% акцент. Червоний — SALE, дропи, «гарячі» анонси. М’ятний і бірюзовий — літні/курортні капсули. Рожевий — жіночні, романтичні історії.</p>
+</section>
+
+<!-- ═════════ 03 TYPE ═════════ -->
+<section id="type" class="doc-sec">
+  <header><span class="num">03</span><h2>Типографіка</h2><p>Заголовки — Cormorant Garamond Regular. Основний текст — Beausite Classic Web Regular (поки файлу шрифту немає, підставляється Manrope; покладіть <code>BeausiteClassicWeb-Regular.woff2</code> у <code>design-system/fonts/</code>).</p></header>
+  <div id="type-specimen" class="type-list"></div>
+</section>
+
+<!-- ═════════ 04 FORMATS ═════════ -->
+<section id="formats" class="doc-sec">
+  <header><span class="num">04</span><h2>Формати та сітка</h2><p>Усі шаблони — у пікселях для експорту 1:1.</p></header>
+  <div class="formats">
+    <div><div class="fmt" style="width:240px;height:300px"></div><span class="t-caps-s">Пост / карусель</span><b>1080×1350</b><p>4:5 · поля 72px · у сітці профілю видно 3:4 — по ~34px з боків ховаються, ключове тримайте в центрі.</p></div>
+    <div><div class="fmt" style="width:240px;height:427px"></div><span class="t-caps-s">Stories / Reels</span><b>1080×1920</b><p>9:16 · безпечна зона: верх 250px, низ 340px, поля 80px.</p></div>
+    <div><div class="fmt" style="width:240px;height:240px"></div><span class="t-caps-s">Квадрат (реклама)</span><b>1080×1080</b><p>1:1 · для рекламних розміщень у стрічці.</p></div>
+    <div><div class="fmt" style="width:240px;height:427px"></div><span class="t-caps-s">Highlight</span><b>1080×1920</b><p>Видно лише коло ≈ 600px у центрі.</p></div>
+  </div>
+</section>
+
+<!-- ═════════ 05 LOGO ═════════ -->
+<section id="logo" class="doc-sec">
+  <header><span class="num">05</span><h2>Логотип</h2><p>Логотип — завжди з офіційного брендбуку (зараз тимчасовий wordmark). Розміщення: по центру зверху або знизу, ширина 200–320px у стрічці. Тільки чорний або білий — без кольорових варіантів, тіней і обведень.</p></header>
+  <div class="logo-tiles">
+    <div class="bg-white"><span class="logo">ANDRE TAN</span></div>
+    <div class="bg-beige"><span class="logo">ANDRE TAN</span></div>
+    <div class="bg-black"><span class="logo logo--white">ANDRE TAN</span></div>
+  </div>
+</section>
+
+<!-- ═════════ COMPONENTS ═════════ -->
+<section id="components" class="doc-sec">
+  <header><span class="num">06</span><h2>Компоненти</h2><p>Класи з <code>components.css</code>. Сірий фон демо-плиток — щоб читались і світлі, і темні варіанти.</p></header>
+
+  <div class="comp"><h4>Logo <code>.logo</code> <code>.logo--white</code></h4>
+    <div class="comp__stage"><span class="logo">ANDRE TAN</span><span class="logo logo--white">ANDRE TAN</span></div></div>
+
+  <div class="comp"><h4>Meta Row <code>.meta-row</code> · <code>--light</code> · <code>--accent</code></h4>
+    <div class="comp__stage col">
+      <div class="meta-row" style="width:936px"><span>SS 2027</span><span>ANDRE TAN</span><span>New in</span></div>
+      <div class="meta-row meta-row--light" style="width:936px"><span>SS 2027</span><span>ANDRE TAN</span><span>New in</span></div>
+      <div class="meta-row meta-row--accent" style="width:936px"><span>SS 2027</span><span>ANDRE TAN</span><span>New in</span></div>
+    </div></div>
+
+  <div class="comp"><h4>Button <code>.btn</code> · <code>--solid-dark</code> <code>--solid-light</code> <code>--outline-dark</code> <code>--outline-light</code> · <code>.no-arrow</code></h4>
+    <div class="comp__stage">
+      <span class="btn btn--solid-dark">Дивитись колекцію</span><span class="btn btn--solid-light">Дивитись колекцію</span>
+      <span class="btn btn--outline-dark">Дивитись колекцію</span><span class="btn btn--outline-light">Дивитись колекцію</span>
+    </div></div>
+
+  <div class="comp"><h4>Badge <code>.badge</code> · <code>--outline-dark</code> <code>--outline-light</code> <code>--black</code> <code>--red</code> <code>--white</code></h4>
+    <div class="comp__stage">
+      <span class="badge badge--outline-dark">New in</span><span class="badge badge--outline-light">Limited</span>
+      <span class="badge badge--black">New in</span><span class="badge badge--red">−30%</span><span class="badge badge--white">Sold out</span>
+    </div></div>
+
+  <div class="comp"><h4>Price Tag <code>.price</code> · <code>--sale</code> · <code>--light</code></h4>
+    <div class="comp__stage">
+      <div class="price"><span class="price__name">Сукня-сорочка з шовку</span><div class="price__row"><span class="price__value">12 900 UAH</span></div></div>
+      <div class="price price--sale"><span class="price__name">Сукня-сорочка з шовку</span><div class="price__row"><span class="price__old">12 900 UAH</span><span class="price__value">9 030 UAH</span></div></div>
+      <div class="price price--light"><span class="price__name">Сукня-сорочка з шовку</span><div class="price__row"><span class="price__value">12 900 UAH</span></div></div>
+      <div class="price price--light price--sale"><span class="price__name">Сукня-сорочка з шовку</span><div class="price__row"><span class="price__old">12 900 UAH</span><span class="price__value">9 030 UAH</span></div></div>
+    </div></div>
+
+  <div class="comp"><h4>Slide Counter <code>.counter</code> · <code>--light</code></h4>
+    <div class="comp__stage"><span class="counter" data-cur="01" data-total="05"><i></i></span><span class="counter counter--light" data-cur="01" data-total="05"><i></i></span></div></div>
+
+  <div class="comp"><h4>Photo <code>.photo</code> — перетягніть сюди будь-яке фото з комп’ютера</h4>
+    <div class="comp__stage" style="background:var(--at-surface-stone)"><div class="photo" style="width:432px;height:540px"></div></div></div>
+
+  <div class="comp"><h4>Highlight Cover <code>.hl-cover</code> · <code>.hl--black/white/beige/blush/mint</code> — див. розділ Highlights</h4></div>
+</section>
+
+<!-- ═════════ 01 POSTS ═════════ -->
+<section id="posts" class="doc-sec wide">
+  <header><span class="num">T1</span><h2>Feed — Posts</h2><p>1080×1350. Перетягніть фото на сірі плейсхолдери, щоб побачити макет із реальним знімком.</p></header>
+  <div class="frames">
+
+    <div class="canvas c-post bg-black" id="post-editorial" data-name="Post / Editorial Cover">
+      <div class="photo fill"></div><div class="scrim" style="height:700px"></div>
+      <div class="layer pad-feed">
+        <div class="logo logo--white" style="align-self:center">ANDRE TAN</div>
+        <div class="mt-auto c-inverse"><div class="t-display-xl">Нова<br>колекція</div>
+          <div class="meta-row meta-row--light" style="margin-top:56px"><span>SS 2027</span><span>ANDRE TAN</span><span>New in</span></div></div>
+      </div>
+    </div>
+
+    <div class="canvas c-post bg-white" id="post-magazine" data-name="Post / Magazine">
+      <div class="layer pad-feed center">
+        <div class="photo" style="width:936px;height:700px"></div>
+        <div class="meta-row meta-row--accent" style="margin-top:24px"><span>SS 2027</span><span>ANDRE TAN</span><span>New in</span></div>
+        <div class="t-display-l" style="margin-top:56px">Тиша шовку</div>
+        <div class="t-h2-italic">нова капсула</div>
+        <div class="t-body-m c-secondary" style="max-width:760px;margin-top:24px">Легкість, що тримає форму. Шовкові сукні та костюми для теплих вечорів міста.</div>
+        <div class="logo logo--sm mt-auto">ANDRE TAN</div>
+      </div>
+    </div>
+
+    <div class="canvas c-post bg-beige" id="post-product" data-name="Post / Product Focus">
+      <div class="layer pad-feed">
+        <div class="photo" style="width:936px;height:1000px"><span class="badge badge--black" style="position:absolute;left:32px;top:32px">New in</span></div>
+        <div class="row between" style="margin-top:48px">
+          <div class="price"><span class="price__name">Сукня-сорочка з шовку</span><div class="price__row"><span class="price__value">12 900 UAH</span></div></div>
+          <span class="btn btn--outline-dark" style="align-self:center">Купити</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="canvas c-post bg-black" id="post-statement" data-name="Post / Statement">
+      <div class="layer pad-feed center">
+        <div class="t-caps-s c-secondary-inverse" style="margin-top:148px">ANDRE TAN about</div>
+        <div class="grow" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <div class="t-display-l italic" style="max-width:900px">«Жінка, яка не боїться бути помітною»</div>
+          <div class="t-caps-m c-secondary-inverse" style="margin-top:56px">— Андре Тан</div>
+        </div>
+        <div class="logo logo--white">ANDRE TAN</div>
+      </div>
+    </div>
+
+    <div class="canvas c-post bg-blush" id="post-teaser" data-name="Post / Collection Teaser">
+      <div class="layer pad-feed center">
+        <div class="logo">ANDRE TAN</div>
+        <div class="grow" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <div class="t-caps-m c-accent">Анонс колекції</div>
+          <div class="t-display-xl" style="margin-top:24px">Скоро</div>
+          <div class="t-h2-italic" style="margin-top:28px">Resort 2027</div>
+          <div class="t-caps-m" style="margin-top:64px">15.03.2027 · 19:00 · Київ</div>
+        </div>
+        <span class="btn btn--outline-dark" style="align-self:center;margin-bottom:40px">Нагадати мені</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 02 CAROUSEL ═════════ -->
+<section id="carousel" class="doc-sec wide">
+  <header><span class="num">T2</span><h2>Feed — Carousel</h2><p>5 × 1080×1350. Слайди стоять впритул — так видно, як карусель гортається. Обкладинка (01) має працювати і як окремий пост у сітці.</p></header>
+  <div class="frames strip">
+    <div class="canvas c-post bg-beige" id="car-cover" data-name="01 Cover">
+      <div class="layer pad-feed center">
+        <div class="row between" style="width:100%"><span class="counter" data-cur="01" data-total="05"><i></i></span><span class="logo logo--sm">ANDRE TAN</span></div>
+        <div class="t-display-xl" style="margin-top:60px">Лукбук</div>
+        <div class="t-h2-italic" style="margin-top:12px">SS 2027 · 12 образів</div>
+        <div class="photo mt-auto" style="width:936px;height:700px"></div>
+        <div class="t-caps-s" style="align-self:flex-end;margin-top:40px">Гортайте →</div>
+      </div>
+    </div>
+    <div class="canvas c-post bg-black" data-name="02 Look">
+      <div class="photo fill"></div>
+      <div class="layer pad-feed c-inverse">
+        <span class="counter counter--light" data-cur="02" data-total="05"><i></i></span>
+        <div class="t-h2-italic mt-auto">Look 01</div>
+        <div class="t-caps-s" style="margin-top:20px">Сукня-сорочка · пояс · мюлі</div>
+      </div>
+    </div>
+    <div class="canvas c-post bg-white" data-name="03 Diptych">
+      <div class="layer pad-feed">
+        <span class="counter" data-cur="03" data-total="05"><i></i></span>
+        <div class="row" style="gap:24px;margin-top:48px;align-items:flex-start">
+          <div><div class="photo" style="width:456px;height:900px"></div>
+            <div class="price" style="margin-top:40px"><span class="price__name">Жакет оверсайз</span><div class="price__row"><span class="price__value">12 900 UAH</span></div></div></div>
+          <div><div class="photo" style="width:456px;height:900px"></div>
+            <div class="price" style="margin-top:40px"><span class="price__name">Штани палаццо</span><div class="price__row"><span class="price__value">8 400 UAH</span></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="canvas c-post bg-white" data-name="04 Detail">
+      <div class="photo" style="width:1080px;height:860px"></div>
+      <span class="counter counter--light" data-cur="04" data-total="05" style="position:absolute;left:72px;top:72px"><i></i></span>
+      <div style="padding:64px 72px 0">
+        <div class="t-caps-s c-accent">Деталі</div>
+        <div class="t-h2" style="max-width:860px;margin-top:24px">Італійський шовк, ручна обробка швів</div>
+        <div class="t-body-m c-secondary" style="max-width:760px;margin-top:24px">Тканина, що дихає і тримає силует. Пояс на кнопках регулює посадку.</div>
+      </div>
+    </div>
+    <div class="canvas c-post bg-black" id="car-cta" data-name="05 CTA">
+      <div class="layer pad-feed center">
+        <span class="counter counter--light" data-cur="05" data-total="05" style="align-self:flex-start"><i></i></span>
+        <div class="grow" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <div class="t-display-l">Колекція<br>вже онлайн</div>
+          <span class="btn btn--solid-light" style="align-self:center;margin-top:80px">Перейти в магазин</span>
+          <div class="t-caps-s c-secondary-inverse" style="margin-top:32px">Посилання в профілі</div>
+        </div>
+        <div class="logo logo--white">ANDRE TAN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 03 STORIES ═════════ -->
+<section id="stories" class="doc-sec wide">
+  <header><span class="num">T3</span><h2>Stories</h2><p>1080×1920. Увімкніть «Safe zones» угорі, щоб перевірити, чи текст не перекривається інтерфейсом Instagram.</p></header>
+  <div class="frames">
+    <div class="canvas c-story bg-black" data-name="Story / New Arrival">
+      <div class="photo fill"></div><div class="scrim" style="height:920px"></div>
+      <div class="layer pad-story c-inverse">
+        <span class="badge badge--white" style="margin-top:20px">New in</span>
+        <div class="t-h1 mt-auto">Сукня-сорочка<br>з шовку</div>
+        <div class="t-price" style="margin-top:24px">12 900 UAH</div>
+        <span class="btn btn--solid-light" style="margin-top:48px">Переглянути</span>
+      </div><div class="safe-zones"><i></i><i></i></div>
+    </div>
+    <div class="canvas c-story bg-black" data-name="Story / Collection Launch">
+      <div class="layer pad-story center c-inverse">
+        <div class="logo logo--white" style="margin-top:20px">ANDRE TAN</div>
+        <div class="t-caps-m c-accent" style="margin-top:72px">Прем’єра колекції</div>
+        <div class="t-display-xl" style="margin-top:40px">Resort<br>2027</div>
+        <div class="photo" style="width:920px;height:440px;margin-top:56px"></div>
+        <div class="t-h2-italic" style="margin-top:40px">15 березня · 19:00</div>
+        <span class="btn btn--outline-light mt-auto" style="align-self:center">Нагадати мені</span>
+      </div><div class="safe-zones"><i></i><i></i></div>
+    </div>
+    <div class="canvas c-story bg-white" data-name="Story / Shop the Look">
+      <div class="layer pad-story">
+        <div class="t-caps-m c-accent" style="margin-top:20px">Shop the look</div>
+        <div class="t-h1" style="margin-top:20px">Образ тижня</div>
+        <div class="shop-grid">
+          <div><div class="photo" style="width:450px;height:400px"></div><div class="price"><span class="price__name">Жакет</span><div class="price__row"><span class="price__value">14 500 UAH</span></div></div></div>
+          <div><div class="photo" style="width:450px;height:400px"></div><div class="price"><span class="price__name">Топ</span><div class="price__row"><span class="price__value">4 200 UAH</span></div></div></div>
+          <div><div class="photo" style="width:450px;height:400px"></div><div class="price"><span class="price__name">Штани</span><div class="price__row"><span class="price__value">8 400 UAH</span></div></div></div>
+          <div><div class="photo" style="width:450px;height:400px"></div><div class="price"><span class="price__name">Сумка</span><div class="price__row"><span class="price__value">9 900 UAH</span></div></div></div>
+        </div>
+        <span class="btn btn--solid-dark mt-auto">Купити образ</span>
+      </div><div class="safe-zones"><i></i><i></i></div>
+    </div>
+    <div class="canvas c-story bg-black" data-name="Story / Sale">
+      <div class="photo fill"></div><div class="scrim" style="height:1220px"></div>
+      <div class="layer pad-story c-inverse">
+        <span class="badge badge--red" style="margin-top:20px">до −50%</span>
+        <div class="t-display-xl italic mt-auto" style="margin-left:-6px">Sale</div>
+        <div class="t-body-l" style="max-width:820px;margin-top:16px">Фінальні знижки на обрані моделі колекції FW 2026</div>
+        <div class="t-caps-l" style="margin-top:32px">16.11 — 01.12</div>
+        <span class="btn btn--solid-light" style="margin-top:64px">До розпродажу</span>
+      </div><div class="safe-zones"><i></i><i></i></div>
+    </div>
+    <div class="canvas c-story bg-beige" data-name="Story / Designer Word">
+      <div class="layer pad-story center">
+        <div class="t-caps-m c-accent" style="margin-top:20px">Від дизайнера</div>
+        <div class="t-h1 italic" style="max-width:900px;margin-top:72px">«Ця колекція — про жінку, яка обирає себе. Чисті лінії, натуральні тканини, жодного зайвого жесту.»</div>
+        <div class="photo" style="width:440px;height:480px;margin-top:64px"></div>
+        <div class="t-h2-italic" style="margin-top:32px">Андре Тан</div>
+        <div class="logo mt-auto">ANDRE TAN</div>
+      </div><div class="safe-zones"><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 04 HIGHLIGHTS ═════════ -->
+<section id="highlights" class="doc-sec wide">
+  <header><span class="num">T4</span><h2>Highlights</h2><p>Одне слово, курсив Cormorant, нейтральні фони; акцентні кольори — для сезонних рубрик. Видно лише коло ≈ 600px у центрі.</p></header>
+  <div class="frames">
+    <div class="canvas c-story hl-cover hl--black" id="hl-new" data-name="Highlight / New"><span class="hl-cover__title">New</span><span class="hl-cover__rule"></span></div>
+    <div class="canvas c-story hl-cover hl--beige" id="hl-looks" data-name="Highlight / Looks"><span class="hl-cover__title">Looks</span><span class="hl-cover__rule"></span></div>
+    <div class="canvas c-story hl-cover hl--white" id="hl-shop" data-name="Highlight / Shop"><span class="hl-cover__title">Shop</span><span class="hl-cover__rule"></span></div>
+    <div class="canvas c-story hl-cover hl--blush" id="hl-backstage" data-name="Highlight / Backstage"><span class="hl-cover__title">Backstage</span><span class="hl-cover__rule"></span></div>
+    <div class="canvas c-story hl-cover hl--mint" id="hl-reviews" data-name="Highlight / Reviews"><span class="hl-cover__title">Reviews</span><span class="hl-cover__rule"></span></div>
+    <div class="canvas c-story hl-cover hl--black" id="hl-info" data-name="Highlight / Info"><span class="hl-cover__title">Info</span><span class="hl-cover__rule"></span></div>
+  </div>
+  <h4 class="sub">Так обкладинки виглядають у профілі</h4>
+  <div class="hl-preview" data-hl-row="96"></div>
+</section>
+
+<!-- ═════════ 05 ADS ═════════ -->
+<section id="ads" class="doc-sec wide">
+  <header><span class="num">T5</span><h2>Ads</h2><p>Реклама на один рівень сміливіша за органічні пости: завжди є ціна або оффер і Solid-кнопка. Текст ≤ 20% площі, логотип у кожному креативі.</p></header>
+  <div class="frames">
+    <div class="canvas c-square bg-white" data-name="Ad / Square">
+      <div class="photo" style="position:absolute;left:0;top:0;width:540px;height:1080px"></div>
+      <div class="layer" style="left:540px;padding:120px 64px 64px">
+        <span class="badge badge--outline-dark">New in</span>
+        <div class="t-display-l" style="margin-top:48px">Тренч<br>з льону</div>
+        <div class="t-price" style="margin-top:32px">15 800 UAH</div>
+        <span class="btn btn--solid-dark" style="margin-top:64px">Купити</span>
+        <div class="logo logo--sm mt-auto" style="align-self:flex-start">ANDRE TAN</div>
+      </div>
+    </div>
+    <div class="canvas c-post bg-black" id="ad-feed" data-name="Ad / Feed">
+      <div class="photo fill"></div><div class="scrim" style="height:800px"></div>
+      <div class="layer pad-feed c-inverse">
+        <div class="logo logo--white" style="align-self:center">ANDRE TAN</div>
+        <div class="t-display-l mt-auto">Літо в місті</div>
+        <div class="t-body-l" style="max-width:820px;margin-top:24px">Нова колекція SS 2027 вже онлайн. Доставка по Україні — 1–2 дні.</div>
+        <span class="btn btn--solid-light" style="margin-top:56px">Купити зараз</span>
+      </div>
+    </div>
+    <div class="canvas c-story bg-beige" data-name="Ad / Story">
+      <div class="photo" style="position:absolute;left:0;top:0;width:1080px;height:1180px"></div>
+      <span class="badge badge--red" style="position:absolute;left:80px;top:270px">−20% на першу покупку</span>
+      <div class="layer" style="top:1180px;padding:64px 80px var(--at-safe-story-bottom)">
+        <div class="t-caps-m c-accent">Лише онлайн</div>
+        <div class="t-h1" style="margin-top:24px">Ваш перший образ<br>ANDRE TAN</div>
+        <span class="btn btn--solid-dark mt-auto">Обрати образ</span>
+      </div><div class="safe-zones"><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 06 PROFILE GRID ═════════ -->
+<section id="grid" class="doc-sec wide">
+  <header><span class="num">T6</span><h2>Profile Grid</h2><p>Сітка зібрана з живих шаблонів вище — перетягніть фото в шаблони, і сітка оновиться одразу.</p></header>
+  <div class="profile-wrap">
+    <div class="profile">
+      <div class="profile__head">
+        <div class="profile__avatar"><span class="logo logo--white" style="font-size:11px;letter-spacing:.2em;margin-right:-.2em">ANDRE TAN</span></div>
+        <div><div class="t-h3" style="font-size:30px">andretan</div>
+          <p>ANDRE TAN — український дизайнер. Contemporary luxury.<br>Нова колекція SS 2027 ↓</p></div>
+      </div>
+      <div class="hl-preview small" data-hl-row="64"></div>
+      <div class="profile__grid">
+        <div class="tile" data-clone="post-editorial"></div><div class="tile" data-clone="post-statement"></div><div class="tile" data-clone="car-cover"></div>
+        <div class="tile" data-clone="post-product"></div><div class="tile" data-clone="post-magazine"></div><div class="tile" data-clone="post-teaser"></div>
+        <div class="tile" data-clone="ad-feed"></div><div class="tile" data-clone="car-cta"></div><div class="tile" data-clone="post-editorial"></div>
+      </div>
+    </div>
+    <div class="rules">
+      <div><h3>Ритм</h3><p>Чергуйте: фото на весь кадр → текстовий/editorial-пост → продукт. Сусідні плитки не повторюють один фон.</p></div>
+      <div><h3>Обріз 3:4</h3><p>Сітка профілю показує пости 4:5 як 3:4 — краї ~34px з боків ховаються. Логотип і заголовки — в центрі.</p></div>
+      <div><h3>Контраст</h3><p>У кожному ряду максимум 1 чорна плитка та 1 акцентна (рожевий / м’ятний / червоний).</p></div>
+      <div><h3>Кампанії</h3><p>Анонс колекції: Teaser → Editorial Cover → Карусель-лукбук → Product Focus. Публікуйте блоками по 3, щоб ряд читався цілісно.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>

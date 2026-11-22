@@ -1,0 +1,95 @@
+/* ANDRE TAN — Instagram Design System · Tokens
+   Дзеркало змінних Figma (Primitives / Brand / Layout / Typography).
+   HEX-значення робочі — звірити з офіційним брендбуком. */
+
+@font-face {
+  font-family: "Beausite Classic Web";
+  src: local("Beausite Classic Web"), local("BeausiteClassicWeb-Regular"),
+       url("fonts/BeausiteClassicWeb-Regular.woff2") format("woff2"),
+       url("fonts/BeausiteClassicWeb-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Primitives ── */
+  --at-black: #000000;
+  --at-white: #FFFFFF;
+  --at-ink-900: #141414;
+  --at-stone-600: #6E6A65;
+  --at-stone-300: #C9C4BD;
+  --at-stone-100: #F0EEEB;
+  --at-beige-400: #D9C7B0;
+  --at-beige-200: #EADFD1;
+  --at-beige-50: #F6F1EA;
+  --at-pink-300: #EBC1C7;
+  --at-pink-100: #F7E3E6;
+  --at-red-600: #B3121D;
+  --at-mint-300: #BFE3D2;
+  --at-mint-100: #E4F3EC;
+  --at-turquoise-600: #0B8A8A;
+
+  /* ── Brand (semantic) ── */
+  --at-surface-white: var(--at-white);
+  --at-surface-black: var(--at-black);
+  --at-surface-beige: var(--at-beige-50);
+  --at-surface-beige-deep: var(--at-beige-200);
+  --at-surface-blush: var(--at-pink-100);
+  --at-surface-mint: var(--at-mint-100);
+  --at-surface-stone: var(--at-stone-100);
+  --at-surface-photo: var(--at-stone-300);
+
+  --at-text-primary: var(--at-black);
+  --at-text-inverse: var(--at-white);
+  --at-text-secondary: var(--at-stone-600);
+  --at-text-secondary-inverse: var(--at-stone-300);
+
+  --at-accent-red: var(--at-red-600);
+  --at-accent-turquoise: var(--at-turquoise-600);
+  --at-accent-pink: var(--at-pink-300);
+  --at-accent-mint: var(--at-mint-300);
+  --at-accent-beige: var(--at-beige-400);
+
+  --at-border-strong: var(--at-black);
+  --at-border-inverse: var(--at-white);
+  --at-border-hairline: var(--at-stone-300);
+
+  /* ── Layout ── */
+  --at-space-8: 8px;
+  --at-space-16: 16px;
+  --at-space-24: 24px;
+  --at-space-32: 32px;
+  --at-space-48: 48px;
+  --at-space-64: 64px;
+  --at-space-96: 96px;
+  --at-space-128: 128px;
+  --at-margin-feed: 72px;
+  --at-margin-story: 80px;
+  --at-safe-story-top: 250px;
+  --at-safe-story-bottom: 340px;
+  --at-radius-none: 0;
+  --at-radius-pill: 999px;
+
+  /* ── Typography ── */
+  --at-font-heading: "Cormorant Garamond", "Times New Roman", serif;
+  --at-font-body: "Beausite Classic Web", "Manrope", "Helvetica Neue", Arial, sans-serif;
+
+  /* ── Overlay ── */
+  --at-scrim-bottom: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%);
+}
+
+/* ── Text styles (розміри для полотна 1080px) ── */
+.t-display-xl   { font: 400 180px/0.90 var(--at-font-heading); letter-spacing: -0.02em; }
+.t-display-l    { font: 400 128px/0.92 var(--at-font-heading); letter-spacing: -0.015em; }
+.t-h1           { font: 400 88px/1.00 var(--at-font-heading); letter-spacing: -0.01em; }
+.t-h2           { font: 400 60px/1.05 var(--at-font-heading); letter-spacing: -0.005em; }
+.t-h2-italic    { font: italic 400 60px/1.05 var(--at-font-heading); letter-spacing: -0.005em; }
+.t-h3           { font: 400 44px/1.10 var(--at-font-heading); }
+.t-body-l       { font: 400 32px/1.45 var(--at-font-body); }
+.t-body-m       { font: 400 26px/1.45 var(--at-font-body); }
+.t-caps-l       { font: 400 24px/1.2 var(--at-font-body); letter-spacing: 0.24em; text-transform: uppercase; }
+.t-caps-m       { font: 400 20px/1.2 var(--at-font-body); letter-spacing: 0.28em; text-transform: uppercase; }
+.t-caps-s       { font: 400 16px/1.2 var(--at-font-body); letter-spacing: 0.32em; text-transform: uppercase; }
+.t-price        { font: 400 30px/1.2 var(--at-font-body); letter-spacing: 0.04em; text-transform: uppercase; }
+.italic         { font-style: italic; }

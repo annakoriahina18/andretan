@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Жакет двобортний у клітинку · Editorial Split — ANDRE TAN</title>
+<!-- Готова сторіс. Шаблон: Story / Editorial Split · 1080×1920.
+     Рендер у PNG: powershell -ExecutionPolicy Bypass -File posts/render.ps1 jacket-check-violet -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@300;400;500&family=Montserrat:wght@700&family=Ballet:opsz@16..72&family=Imperial+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="../components.css">
+<link rel="stylesheet" href="post.css">
+</head>
+<body>
+
+<div class="canvas c-story bg-black" data-name="Story / Editorial Split · Жакет у клітинку">
+  <!-- фон, ліва половина: фото 2 (крупний план) -->
+  <div class="photo has-image" style="position:absolute;left:0;top:0;width:540px;height:1920px;background-image:url('assets/jacket-check-violet-close.jpg');background-position:50% center"></div>
+  <!-- фон, права половина: панель (колір ink/900 з редактора) -->
+  <div style="position:absolute;left:540px;top:0;width:540px;height:1920px;background:var(--at-ink-900)"></div>
+  <!-- передній план: фото 1 (повний образ) -->
+  <div class="photo has-image" style="position:absolute;left:270px;top:520px;width:580px;height:840px;background-image:url('assets/jacket-check-violet-full.jpg');background-position:center 20%"></div>
+
+  <!-- тексти оформлені як у сторіс Diptych: назва товару (Caps M / S) і ціна (Ціна), світлі на темній панелі -->
+  <div class="price price--light" style="position:absolute;left:600px;right:var(--at-margin-story);bottom:calc(1920px - 520px + 32px)"><span class="price__name" style="line-height:1.45">Жакет двобортний приталений у клітинку з розкльошеними рукавами фіолетовий</span></div>
+  <div class="price price--light" style="position:absolute;left:600px;right:var(--at-margin-story);top:1392px"><div class="price__row"><span class="price__value">7 999 ₴</span></div></div>
+</div>
+
+<script src="../typo.js"></script>
+</body>
+</html>

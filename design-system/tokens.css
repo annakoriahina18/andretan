@@ -110,18 +110,32 @@
   --at-post-heading: "Vela Sans", "Manrope", "Helvetica Neue", Arial, sans-serif;
   --at-post-body: "Inter", "Helvetica Neue", Arial, sans-serif;
   --at-post-script: "Ballet", "Great Vibes", cursive; /* Great Vibes — лише для кирилиці, якої в Ballet немає */
+
+  /* Товщини, регістр і розміри (полотно 1080px) — їх змінює редактор через theme.css */
+  --at-post-display-weight: 700;
+  --at-post-heading-weight: 300;
+  --at-post-display-case: uppercase;
+  --at-post-size-display-xl: 132px;
+  --at-post-size-display-l: 96px;
+  --at-post-size-h1: 80px;
+  --at-post-size-h2: 56px;
+  --at-post-size-h3: 40px;
+  --at-post-size-script: 96px;
+  --at-post-size-script-l: 150px;
+  --at-post-size-body-l: 32px;
+  --at-post-size-body-m: 26px;
 }
 .canvas, .post-type { --at-font-body: var(--at-post-body); }
 
-:is(.canvas, .post-type) .t-display-xl { font: 700 132px/0.95 var(--at-post-display); letter-spacing: -0.02em; text-transform: uppercase; }
-:is(.canvas, .post-type) .t-display-l  { font: 700 96px/0.98 var(--at-post-display); letter-spacing: -0.015em; text-transform: uppercase; }
-:is(.canvas, .post-type) .t-h1         { font: 300 80px/1.05 var(--at-post-heading); letter-spacing: -0.02em; }
-:is(.canvas, .post-type) .t-h2         { font: 300 56px/1.10 var(--at-post-heading); letter-spacing: -0.01em; }
-:is(.canvas, .post-type) .t-h3         { font: 300 40px/1.15 var(--at-post-heading); letter-spacing: -0.005em; }
-:is(.canvas, .post-type) .t-h2-italic  { font: 400 96px/1.05 var(--at-post-script); letter-spacing: 0; }
-:is(.canvas, .post-type) .t-script-l   { font: 400 150px/1.0 var(--at-post-script); }
-:is(.canvas, .post-type) .t-body-l     { font: 400 32px/1.45 var(--at-post-body); }
-:is(.canvas, .post-type) .t-body-m     { font: 400 26px/1.45 var(--at-post-body); }
+:is(.canvas, .post-type) .t-display-xl { font: var(--at-post-display-weight) var(--at-post-size-display-xl)/0.95 var(--at-post-display); letter-spacing: -0.02em; text-transform: var(--at-post-display-case); }
+:is(.canvas, .post-type) .t-display-l  { font: var(--at-post-display-weight) var(--at-post-size-display-l)/0.98 var(--at-post-display); letter-spacing: -0.015em; text-transform: var(--at-post-display-case); }
+:is(.canvas, .post-type) .t-h1         { font: var(--at-post-heading-weight) var(--at-post-size-h1)/1.05 var(--at-post-heading); letter-spacing: -0.02em; }
+:is(.canvas, .post-type) .t-h2         { font: var(--at-post-heading-weight) var(--at-post-size-h2)/1.10 var(--at-post-heading); letter-spacing: -0.01em; }
+:is(.canvas, .post-type) .t-h3         { font: var(--at-post-heading-weight) var(--at-post-size-h3)/1.15 var(--at-post-heading); letter-spacing: -0.005em; }
+:is(.canvas, .post-type) .t-h2-italic  { font: 400 var(--at-post-size-script)/1.05 var(--at-post-script); letter-spacing: 0; }
+:is(.canvas, .post-type) .t-script-l   { font: 400 var(--at-post-size-script-l)/1.0 var(--at-post-script); }
+:is(.canvas, .post-type) .t-body-l     { font: 400 var(--at-post-size-body-l)/1.45 var(--at-post-body); }
+:is(.canvas, .post-type) .t-body-m     { font: 400 var(--at-post-size-body-m)/1.45 var(--at-post-body); }
 :is(.canvas, .post-type) .t-caps-l     { font: 500 24px/1.2 var(--at-post-body); letter-spacing: 0.2em; }
 :is(.canvas, .post-type) .t-caps-m     { font: 500 20px/1.2 var(--at-post-body); letter-spacing: 0.22em; }
 :is(.canvas, .post-type) .t-caps-s     { font: 500 16px/1.2 var(--at-post-body); letter-spacing: 0.26em; }

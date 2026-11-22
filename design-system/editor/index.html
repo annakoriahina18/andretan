@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ANDRE TAN — Редактор</title>
+<!-- Приватний редактор теми. Відкривається лише через serve.ps1 за секретним ключем. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@300;400;500;600&family=Montserrat:wght@700&family=Inter:wght@400;500&family=Ballet:opsz@16..72&family=Great+Vibes&display=swap" rel="stylesheet">
+<link id="ed-fonts" rel="stylesheet" href="data:text/css,">
+<!-- лише tokens.css (без theme.css): звідси редактор бере базові значення -->
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+
+<header class="ed-top">
+  <div class="ed-brand">ANDRE TAN <span>Редактор · приватно</span></div>
+  <label class="ed-pv">Прев'ю <select id="pv"></select></label>
+  <div class="ed-actions">
+    <span id="status" class="ed-status" role="status"></span>
+    <button id="btn-reset" class="ed-btn ed-btn--ghost" title="Повернути все як у tokens.css (до збереження нічого не зміниться)">Скинути до бази</button>
+    <button id="btn-save" class="ed-btn ed-btn--dark" title="Ctrl+S">Зберегти</button>
+    <button id="btn-render" class="ed-btn" title="Зберегти і зробити нові PNG усіх постів">Оновити PNG постів</button>
+  </div>
+</header>
+
+<div class="ed-main">
+  <aside class="ed-panel" id="panel">
+    <section>
+      <h2>Кольори</h2>
+      <p class="ed-hint">Базова палітра. Фони, текст і акценти в усіх шаблонах беруться з неї.</p>
+      <div id="colors"></div>
+    </section>
+    <section>
+      <h2>Шрифти постів</h2>
+      <p class="ed-hint">Лише безкоштовні шрифти з ліцензією OFL (Google Fonts). Якщо у шрифті немає кирилиці, українські літери автоматично підставляються схожим шрифтом.</p>
+      <div id="fonts"></div>
+      <div class="ctl ctl--check" data-var="--at-post-display-case">
+        <label><input type="checkbox" id="caps"> Display — великими літерами</label>
+        <button class="undo" title="Як у базі">↺</button>
+      </div>
+    </section>
+    <section>
+      <h2>Розміри тексту</h2>
+      <p class="ed-hint">У пікселях для полотна 1080 px.</p>
+      <div id="sizes"></div>
+    </section>
+    <section>
+      <h2>Поля</h2>
+      <div id="layout"></div>
+    </section>
+    <section>
+      <h2>Зафіксувати версію</h2>
+      <p class="ed-hint">Робить коміт у git: theme.css і PNG постів. Відкотити можна через <code>git revert</code>. Нічого не пушить.</p>
+      <div class="ed-commit">
+        <input id="commit-msg" type="text" placeholder="Що змінено, напр. «Темніший червоний»">
+        <button id="btn-commit" class="ed-btn">Коміт</button>
+      </div>
+      <pre id="log" class="ed-log" hidden></pre>
+    </section>
+  </aside>
+  <div class="ed-stage" id="stage"><iframe id="frame" title="Прев'ю"></iframe></div>
+</div>
+
+<script src="../posts/posts.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>

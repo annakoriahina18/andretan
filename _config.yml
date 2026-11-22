@@ -1,0 +1,7 @@
+# GitHub Pages: приватний редактор і службові скрипти не публікуються.
+# Редактор працює лише локально через design-system/serve.ps1 (за секретним ключем).
+exclude:
+  - design-system/editor
+  - design-system/serve.ps1
+  - design-system/posts/render.ps1
+  - README.md

@@ -14,50 +14,40 @@
     ['Бежевий', ['beige-400', 'beige-200', 'beige-50']],
     ['Акценти', ['red-600', 'pink-300', 'pink-100', 'mint-300', 'mint-100', 'turquoise-600']],
   ];
-  const SIZES = [ // [ключ, назва, мін, макс]
-    ['display-xl', 'Display XL', 60, 220], ['display-l', 'Display L', 48, 160],
-    ['h1', 'H1', 40, 140], ['h2', 'H2', 28, 100], ['h3', 'H3', 22, 80],
-    ['script', 'Script-акцент', 40, 180], ['script-l', 'Script L', 60, 260],
-    ['body-l', 'Body L', 18, 48], ['body-m', 'Body M', 16, 40],
+  const SIZES = [ // [ключ, назва, мін, макс, класи, на які діє цей розмір]
+    ['display-xl', 'Display XL', 60, 260, '.t-display-xl'], ['display-l', 'Display L', 48, 180, '.t-display-l, .disc-circle'],
+    ['h1', 'H1', 40, 140, '.t-h1'], ['h2', 'H2', 28, 100, '.t-h2'], ['h3', 'H3', 22, 80, '.t-h3'],
+    ['script', 'Script-акцент', 40, 180, '.t-h2-italic'], ['script-l', 'Script L', 60, 260, '.t-script-l'],
+    ['body-l', 'Body L', 18, 48, '.t-body-l'], ['body-m', 'Body M', 16, 40, '.t-body-m'],
+    ['caps-l', 'Caps L', 12, 60, '.t-caps-l'], ['caps-m', 'Caps M', 10, 48, '.t-caps-m, .price__name, .btn'], ['caps-s', 'Caps S', 10, 40, '.t-caps-s, .meta-row span, .badge, .counter'],
+    ['price', 'Ціна', 16, 72, '.t-price, .price__value, .price-chip, .price__old'],
+    ['logo', 'Логотип і назви хайлайтів', 16, 120, '.logo, .hl-cover__title'],
   ];
   const LAYOUT = [['--at-margin-feed', 'Поле поста', 24, 160], ['--at-margin-story', 'Поле Stories', 24, 160]];
 
-  // Лише OFL-шрифти; ліцензію, ваги та кирилицю звірено з google/fonts METADATA.pb (2026-11-22)
+  // Лише шрифти дизайн-системи (tokens.css): Cormorant Garamond Regular, Montserrat Bold,
+  // Manrope, Vela Sans, Ballet, Imperial Script. Усі OFL; ліцензію, ваги та кирилицю
+  // звірено з google/fonts METADATA.pb (2026-11-22). Vela Sans — не з Google Fonts,
+  // тому окремо не обирається: це база Heading, що показується як Manrope.
   const FONTS = [
-    { n: 'Montserrat', cat: 'sans', w: [100, 900], cyr: 1 },
-    { n: 'Unbounded', cat: 'sans', w: [200, 900], cyr: 1 },
-    { n: 'Oswald', cat: 'sans', w: [200, 700], cyr: 1 },
-    { n: 'Raleway', cat: 'sans', w: [100, 900], cyr: 1 },
-    { n: 'Jost', cat: 'sans', w: [100, 900], cyr: 1 },
+    { n: 'Montserrat', cat: 'sans', w: [700], cyr: 1 },               // лише Bold
     { n: 'Manrope', cat: 'sans', w: [200, 800], cyr: 1 },
-    { n: 'Inter', cat: 'sans', w: [100, 900], cyr: 1 },
-    { n: 'Open Sans', cat: 'sans', w: [300, 800], cyr: 1 },
-    { n: 'Tenor Sans', cat: 'sans', w: [400], cyr: 1 },
-    { n: 'Playfair Display', cat: 'serif', w: [400, 900], cyr: 1 },
-    { n: 'Cormorant Garamond', cat: 'serif', w: [300, 700], cyr: 1 },
-    { n: 'Lora', cat: 'serif', w: [400, 700], cyr: 1 },
-    { n: 'Bodoni Moda', cat: 'serif', w: [400, 900], cyr: 0 },
-    { n: 'Prata', cat: 'serif', w: [400], cyr: 1 },
-    { n: 'Forum', cat: 'serif', w: [400], cyr: 1 },
-    { n: 'Yeseva One', cat: 'serif', w: [400], cyr: 1 },
+    { n: 'Cormorant Garamond', cat: 'serif', w: [400], cyr: 1 },      // лише Regular
     { n: 'Ballet', cat: 'script', w: [400], cyr: 0, axis: 'opsz@16..72' },
-    { n: 'Great Vibes', cat: 'script', w: [400], cyr: 1 },
-    { n: 'Marck Script', cat: 'script', w: [400], cyr: 1 },
-    { n: 'Bad Script', cat: 'script', w: [400], cyr: 1 },
-    { n: 'Pinyon Script', cat: 'script', w: [400], cyr: 0 },
-    { n: 'Parisienne', cat: 'script', w: [400], cyr: 0 },
-    { n: 'Alex Brush', cat: 'script', w: [400], cyr: 0 },
-    { n: 'Allura', cat: 'script', w: [400], cyr: 0 },
+    { n: 'Imperial Script', cat: 'script', w: [400], cyr: 0 },
   ];
   const CATS = { sans: 'Гротески', serif: 'Антиква', script: 'Рукописні' };
-  const CYR_FALLBACK = { sans: 'Manrope', serif: 'Cormorant Garamond', script: 'Great Vibes' };
+  const CYR_FALLBACK = { sans: 'Manrope', serif: 'Cormorant Garamond', script: 'Cormorant Garamond' };
   const GENERIC = { sans: '"Helvetica Neue", Arial, sans-serif', serif: '"Times New Roman", serif', script: 'cursive' };
   const ROLES = [
-    { id: 'display', v: '--at-post-display', label: 'Display — великі заголовки', weight: '--at-post-display-weight', sample: 'Black Friday' },
-    { id: 'heading', v: '--at-post-heading', label: 'Heading — H1–H3', weight: '--at-post-heading-weight', sample: 'Elegance in Details' },
-    { id: 'body', v: '--at-post-body', label: 'Body — текст і підписи', need: [400, 500], sample: 'Знижки до −90% по 30.11' },
-    { id: 'script', v: '--at-post-script', label: 'Script — рукописний акцент', sample: 'Last days of' },
-    { id: 'logo', v: '--at-font-logo', label: 'Логотип (тимчасовий wordmark)', sample: 'ANDRE TAN' },
+    { id: 'display', v: '--at-post-display', label: 'Display — великі заголовки', weight: '--at-post-display-weight', sample: 'Нова колекція', sel: '.t-display-xl, .t-display-l, .disc-circle' },
+    { id: 'heading', v: '--at-post-heading', label: 'Heading — H1–H3', weight: '--at-post-heading-weight', sample: 'Елегантність у деталях', sel: '.t-h1, .t-h2, .t-h3' },
+    { id: 'body', v: '--at-post-body', label: 'Body — основний текст', need: [400, 500], sample: 'Опис товару', sel: '.t-body-l, .t-body-m' },
+    { id: 'capsl', v: '--at-post-caps-l', label: 'Caps L — назви великими літерами', weight: '--at-post-caps-l-weight', sample: 'НАЗВА', sel: '.t-caps-l' },
+    { id: 'caption', v: '--at-post-caption', label: 'Caps M / S — підписи, назви товарів, мітки', weight: '--at-post-caption-weight', sample: 'ПІДПИС', sel: '.t-caps-m, .t-caps-s, .price__name, .meta-row span, .badge, .counter, .btn' },
+    { id: 'price', v: '--at-post-price', label: 'Ціна', weight: '--at-post-price-weight', sample: '12 999 ₴', sel: '.t-price, .price__value, .price-chip, .price__old' },
+    { id: 'script', v: '--at-post-script', label: 'Script — рукописний акцент', sample: 'new arrival', sel: '.t-script-l, .t-h2-italic, .italic' },
+    { id: 'logo', v: '--at-font-logo', label: 'Логотип і назви хайлайтів', sample: 'ANDRE TAN', sel: '.logo, .hl-cover__title' },
   ];
 
   const COLOR_VARS = COLOR_GROUPS.flatMap(([, ks]) => ks.map(k => `--at-${k}`));
@@ -69,7 +59,7 @@
   const fontMeta = n => FONTS.find(f => f.n === n);
   const firstFamily = stack => stack.split(',')[0].trim().replace(/^["']|["']$/g, '');
   const secondFamily = stack => (stack.split(',')[1] || '').trim().replace(/^["']|["']$/g, '');
-  const clampW = (m, w) => m.w.length === 1 ? 400 : Math.min(m.w[1], Math.max(m.w[0], Math.round(w / 100) * 100));
+  const clampW = (m, w) => m.w.length === 1 ? m.w[0] : Math.min(m.w[1], Math.max(m.w[0], Math.round(w / 100) * 100));
   const roleDefault = r => {
     const fam = firstFamily(def(r.v));
     return { family: fontMeta(fam) ? fam : '', weight: r.weight ? +def(r.weight) : 400 };
@@ -117,7 +107,7 @@
     const fams = [...need].map(([fam, ws]) => {
       const m = fontMeta(fam), e = fam.replace(/ /g, '+');
       if (m.axis) return `family=${e}:${m.axis}`;
-      if (m.w.length === 1) return `family=${e}`;
+      if (m.w.length === 1 && m.w[0] === 400) return `family=${e}`;
       return `family=${e}:wght@${[...ws].sort((a, b) => a - b).join(';')}`;
     });
     return `https://fonts.googleapis.com/css2?${fams.join('&')}&display=swap`;
@@ -165,10 +155,11 @@
     $('#caps').checked = cur('--at-post-display-case') !== 'none';
     ROLES.forEach(r => { const w = document.querySelector(`.role[data-role="${r.id}"] select.w`); if (w) w.disabled = !roleCur(r).family; });
     marks();
+    try { syncSamples(); } catch {} // панель перебудовано — повертаємо тексти з поточного поста
   }
   function weightOpts(v) {
     const m = fontMeta(v.family);
-    const ws = !m ? [v.weight] : m.w.length === 1 ? [400] : Array.from({ length: (m.w[1] - m.w[0]) / 100 + 1 }, (_, i) => m.w[0] + i * 100);
+    const ws = !m ? [v.weight] : m.w.length === 1 ? [m.w[0]] : Array.from({ length: (m.w[1] - m.w[0]) / 100 + 1 }, (_, i) => m.w[0] + i * 100);
     return ws.map(w => `<option value="${w}" ${w === v.weight ? 'selected' : ''}>${w}</option>`).join('');
   }
   function rangeCtl(n, label, min, max) {
@@ -186,7 +177,12 @@
       sample.style.fontWeight = r.weight ? v.weight : 400;
       if (r.id === 'display') sample.style.textTransform = cur('--at-post-display-case');
       if (r.id === 'script') sample.style.fontVariationSettings = '"opsz" 36';
-      el.querySelector('.role__note').textContent = m && !m.cyr ? `Немає кирилиці — українські літери будуть ${CYR_FALLBACK[m.cat]}` : '';
+      // Підказки: (1) роль не використовується у відкритому пості; (2) у тексті є кирилиця, якої немає у шрифті
+      const notes = [];
+      if (el.dataset.unused) notes.push('У цьому пості такого тексту немає — зміна шрифту тут не буде видна. Зразок вище — текст поста для порівняння.');
+      if (m && !m.cyr && /[Ѐ-ӿ]/.test(sample.textContent)) notes.push(`Кирилиці у шрифті немає — українські літери показуються ${CYR_FALLBACK[m.cat]}.`);
+      el.querySelector('.role__note').textContent = notes.join(' ');
+      el.classList.toggle('is-unused', !!el.dataset.unused);
     });
   }
 
@@ -260,7 +256,41 @@
     if (!st) { st = doc.createElement('style'); st.id = 'ed-live'; doc.head.appendChild(st); }
     st.textContent = buildCss(true);
   }
-  frame.addEventListener('load', applyPreview);
+  /* Зразки шрифтів = справжні тексти з поста в прев'ю (оновлюються при кожному відкритті).
+     Для сторінок дизайн-системи — тексти з розділу за якорем; чого немає — базовий зразок. */
+  function syncSamples() {
+    const doc = frame.contentDocument; if (!doc) return;
+    const hash = (previews[+pv.value].src.split('#')[1] || '');
+    const root = (hash && doc.getElementById(hash)) || doc;
+    const scope = root.querySelector('.canvas') ? root : doc;
+    const txt = n => n.innerText.replace(/\s+/g, ' ').trim();
+    // усі різні тексти поста для селектора (у порядку появи)
+    const texts = (sel, max) => [...new Set([...scope.querySelectorAll(`.canvas :is(${sel})`)].map(txt).filter(Boolean))].slice(0, max);
+    const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const ANY = '.t-display-xl, .t-display-l, .t-h1, .t-h2, .t-h3, .t-body-l, .t-body-m, .t-caps-l, .t-caps-m, .t-caps-s, .t-price, .price__value';
+    ROLES.forEach(r => {
+      const el = document.querySelector(`.role[data-role="${r.id}"] .role__sample`); if (!el) return;
+      // кожен текст цієї ролі — окремим рядком; якщо ролі в пості немає — інший текст цього ж поста
+      const own = texts(r.sel, 4);
+      const list = own.length ? own : (r.id !== 'logo' ? texts(ANY, 1) : []);
+      const shown = list.length ? list : [r.sample];
+      el.innerHTML = shown.map(t => `<div title="${esc(t)}">${esc(t)}</div>`).join('');
+      el.closest('.role').dataset.unused = own.length ? '' : '1';
+    });
+    marks(); // оновити підказки під новий пост
+    // повзунки розмірів: під кожним — текст поста, який він змінює; яких немає в пості — приглушені
+    SIZES.forEach(([k, , , , sel]) => {
+      const ctl = document.querySelector(`.ctl[data-var="--at-post-size-${k}"]`); if (!ctl) return;
+      const list = texts(sel, 3);
+      ctl.classList.toggle('is-unused', !list.length);
+      ctl.title = list.length ? '' : 'У відкритому пості немає тексту цього розміру — змініть прев\'ю, щоб побачити ефект';
+      let ex = ctl.querySelector('.ex');
+      if (!ex) { ex = document.createElement('span'); ex.className = 'ex'; ctl.appendChild(ex); }
+      ex.textContent = list.length ? list.join(' · ') : 'у цьому пості немає — видно в шаблонах';
+      ex.title = ex.textContent;
+    });
+  }
+  frame.addEventListener('load', () => { applyPreview(); syncSamples(); });
   pv.addEventListener('change', showPreview);
   new ResizeObserver(fit).observe(stage);
 

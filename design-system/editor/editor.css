@@ -61,7 +61,9 @@ button, input, select { font: inherit; color: inherit; }
 .role__row select { flex: 1; min-width: 0; padding: 6px; border: 1px solid #DDD8D2; background: #fff; }
 .role__row select.w { flex: 0 0 92px; }
 .role__sample { margin-top: 8px; font-size: 28px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.role__note { font-size: 11px; color: #B3121D; margin-top: 4px; }
+.role__note { font-size: 11px; color: #B3121D; margin-top: 4px; line-height: 1.4; }
+.role.is-unused .role__sample { opacity: .45; }
+.role.is-unused .role__note { color: #6E6A65; }
 
 .ed-commit { display: flex; gap: 8px; }
 .ed-commit input { flex: 1; min-width: 0; padding: 6px 8px; border: 1px solid #DDD8D2; }
@@ -78,3 +80,12 @@ button, input, select { font: inherit; color: inherit; }
   .ed-stage { height: 75vh; order: -1; }
   .ed-panel { border-right: 0; }
 }
+/* повзунок, якого немає у відкритому пості, лишається повністю активним — лише підказка сірим */
+.ctl--range.is-unused .ex { display: block; color: #9A948D; font-style: italic; }
+/* зразки ролей: кожен текст поста окремим рядком */
+.role__sample > div { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.role__sample > div + div { margin-top: 4px; }
+/* під повзунком — текст поста, який він змінює */
+.ctl--range { flex-wrap: wrap; }
+.ctl--range .ex { flex: 0 0 100%; padding-left: 112px; font-size: 11px; color: #6E6A65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ctl--range .ex:empty { display: none; }

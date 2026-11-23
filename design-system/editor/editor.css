@@ -89,3 +89,11 @@ button, input, select { font: inherit; color: inherit; }
 .ctl--range { flex-wrap: wrap; }
 .ctl--range .ex { flex: 0 0 100%; padding-left: 112px; font-size: 11px; color: #6E6A65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ctl--range .ex:empty { display: none; }
+/* кольори окремих текстів поста */
+.tcl .lbl { display: flex; flex-direction: column; min-width: 0; }
+.tcl .lbl small { font-size: 10px; color: #6E6A65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
+/* режими редагування тексту в прев'ю */
+.ed-modes { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 8px; }
+.ed-modes .ed-btn { min-height: 30px; padding: 6px 10px; font-size: 10px; }
+.ed-modes .ed-btn.is-on { background: #141414; color: #fff; border-color: #141414; }
+#move-info { color: #B3121D; min-height: 1em; }

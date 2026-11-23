@@ -30,6 +30,15 @@
 <div class="ed-main">
   <aside class="ed-panel" id="panel">
     <section>
+      <h2>Тексти поста</h2>
+      <div class="ed-modes"><button type="button" class="ed-btn ed-btn--ghost" data-mode="text" title="Клік по напису — писати">✎ Текст</button><button type="button" class="ed-btn ed-btn--ghost" data-mode="move" title="Виділити й рухати написи">✥ Переміщення</button><button type="button" class="ed-btn ed-btn--ghost" id="move-reset" title="Повернути виділені (або всі) написи на місце шаблону">↺ На місце</button></div>
+      <p class="ed-hint" id="move-info"></p>
+      <p class="ed-hint"><b>Переміщення:</b> клік — виділити напис, Shift+клік — кілька, тягніть мишкою; стрілки — на 1 px, Shift+стрілки — на 10 px, Esc — зняти виділення.</p>
+      <p class="ed-hint"><b>Текст можна змінити прямо в прев'ю:</b> клікніть на будь-який напис у пості й пишіть (Enter — новий рядок). Зберігається кнопкою «Зберегти».</p>
+      <p class="ed-hint">Кожен текст відкритого поста можна пофарбувати окремо. Колір діє лише в цьому пості; ↺ повертає колір шаблону.</p>
+      <div id="textcolors"></div>
+    </section>
+    <section>
       <h2>Кольори</h2>
       <p class="ed-hint">Базова палітра. Фони, текст і акценти в усіх шаблонах беруться з неї.</p>
       <div id="colors"></div>

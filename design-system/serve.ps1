@@ -69,6 +69,21 @@ while ($l.IsListening) {
             [IO.File]::WriteAllText((Join-Path $root 'theme.css'), $css, $utf8)
             Send-Text $res 200 'saved'
           }
+          'api/post' {
+            # тексти, змінені прямо в прев'ю редактора: замінюємо блок полотна (.canvas) у posts/<id>.html
+            try { $o = (Read-Body $req) | ConvertFrom-Json } catch { Send-Text $res 400 'Bad JSON'; break }
+            if (-not ($o.id -match '^[a-z0-9-]+$')) { Send-Text $res 400 'Bad id'; break }
+            $file = Join-Path $root "posts\$($o.id).html"
+            if (-not (Test-Path $file)) { Send-Text $res 404 'No such post'; break }
+            $new = [string]$o.html
+            if ($new.Length -gt 200000 -or -not $new.StartsWith('<div class="canvas')) { Send-Text $res 400 'Bad html'; break }
+            $html = [IO.File]::ReadAllText($file, $utf8)
+            $rx = [regex]'(?s)<div class="canvas.*?\r?\n</div>(?=\s*<script src="\.\./typo\.js">)'
+            if (-not $rx.IsMatch($html)) { Send-Text $res 409 'Canvas block not found'; break }
+            $html = $rx.Replace($html, [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $new }, 1)
+            [IO.File]::WriteAllText($file, $html, $utf8)
+            Send-Text $res 200 'saved'
+          }
           'api/render' {
             $out = & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'posts\render.ps1') 2>&1 | Out-String
             Send-Text $res 200 $out
@@ -77,8 +92,8 @@ while ($l.IsListening) {
             $msg = (Read-Body $req).Trim()
             if (-not $msg) { $msg = 'Theme: update from editor' }
             $msg = $msg -replace '[\r\n"]', ' '
-            $out = & git -C $root add theme.css posts/export 2>&1 | Out-String
-            $out += & git -C $root commit -m "$msg" -- theme.css posts/export 2>&1 | Out-String
+            $out = & git -C $root add theme.css posts 2>&1 | Out-String
+            $out += & git -C $root commit -m "$msg" -- theme.css posts 2>&1 | Out-String
             Send-Text $res 200 $out
           }
           default { Send-Text $res 404 'Not found' }

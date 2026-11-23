@@ -25,7 +25,7 @@
   ];
   const LAYOUT = [['--at-margin-feed', 'Поле поста', 24, 160], ['--at-margin-story', 'Поле Stories', 24, 160]];
 
-  // Лише шрифти дизайн-системи (tokens.css): Cormorant Garamond Regular, Montserrat Bold,
+  // Лише шрифти дизайн-системи (tokens.css): Cormorant Garamond Regular + Italic, Montserrat Bold, Petit Formal Script,
   // Manrope, Vela Sans, Ballet, Imperial Script. Усі OFL; ліцензію, ваги та кирилицю
   // звірено з google/fonts METADATA.pb (2026-11-22). Vela Sans — не з Google Fonts,
   // тому окремо не обирається: це база Heading, що показується як Manrope.
@@ -33,9 +33,13 @@
     { n: 'Montserrat', cat: 'sans', w: [700], cyr: 1 },               // лише Bold
     { n: 'Manrope', cat: 'sans', w: [200, 800], cyr: 1 },
     { n: 'Cormorant Garamond', cat: 'serif', w: [400], cyr: 1 },      // лише Regular
+    // накреслення: той самий файл Google Fonts, але курсив (fam — справжня назва шрифту)
+    { n: 'Cormorant Garamond Italic', fam: 'Cormorant Garamond', ital: 1, cat: 'serif', w: [400, 700], cyr: 1 }, // курсив 400–700 (2026-11-23)
     { n: 'Ballet', cat: 'script', w: [400], cyr: 0, axis: 'opsz@16..72' },
     { n: 'Imperial Script', cat: 'script', w: [400], cyr: 0 },
+    { n: 'Petit Formal Script', cat: 'script', w: [400], cyr: 0 },     // OFL, лише латиниця (2026-11-23)
   ];
+  const famOf = m => m.fam || m.n;
   const CATS = { sans: 'Гротески', serif: 'Антиква', script: 'Рукописні' };
   const CYR_FALLBACK = { sans: 'Manrope', serif: 'Cormorant Garamond', script: 'Cormorant Garamond' };
   const GENERIC = { sans: '"Helvetica Neue", Arial, sans-serif', serif: '"Times New Roman", serif', script: 'cursive' };
@@ -65,11 +69,15 @@
     return { family: fontMeta(fam) ? fam : '', weight: r.weight ? +def(r.weight) : 400 };
   };
 
-  let state = { vars: {}, fonts: {} };
+  // texts: кольори окремих текстів готових постів { "<id поста>": { "<data-t>": "#HEX" } }
+  let state = { vars: {}, fonts: {}, texts: {} };
   let saved = '';
   const sortObj = o => Object.fromEntries(Object.entries(o).sort(([a], [b]) => a.localeCompare(b)));
-  const norm = s => JSON.stringify({ vars: sortObj(s.vars), fonts: sortObj(s.fonts) });
-  const dirty = () => norm(state) !== saved;
+  const sortTexts = t => Object.fromEntries(Object.entries(t || {}).filter(([, o]) => Object.keys(o).length).sort(([a], [b]) => a.localeCompare(b)).map(([k, o]) => [k, sortObj(o)]));
+  const norm = s => JSON.stringify({ vars: sortObj(s.vars), fonts: sortObj(s.fonts), texts: sortTexts(s.texts) });
+  // тексти поста, змінені прямо в прев'ю (зберігаються в posts/<id>.html)
+  const postEdit = { dirty: false, id: null, canvas: null };
+  const dirty = () => norm(state) !== saved || postEdit.dirty;
   const cur = n => state.vars[n] ?? def(n);
   const roleCur = r => state.fonts[r.id] || roleDefault(r);
 
@@ -88,27 +96,31 @@
   }
 
   /* ── CSS ── */
-  function stackFor(fam) {
-    const m = fontMeta(fam);
-    const p = [`"${fam}"`];
+  function stackFor(name) {
+    const m = fontMeta(name);
+    const p = [`"${famOf(m)}"`];
     if (!m.cyr) p.push(`"${CYR_FALLBACK[m.cat]}"`);
     return `${p.join(', ')}, ${GENERIC[m.cat]}`;
   }
+  const styleOf = name => { const m = fontMeta(name); return m && m.ital ? 'italic' : 'normal'; };
   function importUrl(entries) { // [[role, {family, weight}]]
-    const need = new Map();
-    const add = (fam, ws) => {
-      const m = fontMeta(fam); if (!m) return;
-      if (!need.has(fam)) need.set(fam, new Set());
-      ws.forEach(w => need.get(fam).add(clampW(m, w)));
+    const need = new Map(); // справжня назва → { m, ws: Set ваг, it: Set(0|1) }
+    const add = (name, ws) => {
+      const m = fontMeta(name); if (!m) return;
+      const fam = famOf(m);
+      if (!need.has(fam)) need.set(fam, { m: fontMeta(fam) || m, ws: new Set(), it: new Set() });
+      const e = need.get(fam);
+      ws.forEach(w => e.ws.add(clampW(m, w))); e.it.add(m.ital ? 1 : 0);
       if (!m.cyr) add(CYR_FALLBACK[m.cat], ws);
     };
     entries.forEach(([r, v]) => v.family && add(v.family, r.weight ? [v.weight] : (r.need || [400])));
     if (!need.size) return '';
-    const fams = [...need].map(([fam, ws]) => {
-      const m = fontMeta(fam), e = fam.replace(/ /g, '+');
+    const fams = [...need].map(([fam, { m, ws, it }]) => {
+      const e = fam.replace(/ /g, '+'), wl = [...ws].sort((a, b) => a - b);
       if (m.axis) return `family=${e}:${m.axis}`;
+      if (it.has(1)) return `family=${e}:ital,wght@${[...it].sort().flatMap(i => wl.map(w => `${i},${w}`)).join(';')}`;
       if (m.w.length === 1 && m.w[0] === 400) return `family=${e}`;
-      return `family=${e}:wght@${[...ws].sort((a, b) => a - b).join(';')}`;
+      return `family=${e}:wght@${wl.join(';')}`;
     });
     return `https://fonts.googleapis.com/css2?${fams.join('&')}&display=swap`;
   }
@@ -120,15 +132,74 @@
     ROLES.forEach(r => {
       const o = state.fonts[r.id];
       if (o && o.family) vars[r.v] = stackFor(o.family); else if (full) vars[r.v] = def(r.v);
+      // накреслення (прямий / курсив); 'initial' = змінна не задана → у CSS діє значення за замовчуванням
+      if (o && o.family) vars[r.v + '-style'] = styleOf(o.family); else if (full) vars[r.v + '-style'] = 'initial';
       if (r.weight) { if (o) vars[r.weight] = String(o.weight); else if (full) vars[r.weight] = def(r.weight); }
     });
     const url = importUrl(ROLES.filter(r => state.fonts[r.id]).map(r => [r, state.fonts[r.id]]));
     let css = '';
-    if (!full) css += `/* ANDRE TAN — тема з редактора. Порожня = все як у tokens.css.\n   Файл генерує редактор (editor/), вручну не редагуйте.\n   editor-state: ${JSON.stringify({ vars: sortObj(state.vars), fonts: sortObj(state.fonts) })} */\n`;
+    if (!full) css += `/* ANDRE TAN — тема з редактора. Порожня = все як у tokens.css.\n   Файл генерує редактор (editor/), вручну не редагуйте.\n   editor-state: ${JSON.stringify({ vars: sortObj(state.vars), fonts: sortObj(state.fonts), texts: sortTexts(state.texts) })} */\n`;
     if (url) css += `@import url("${url}");\n`;
     const keys = Object.keys(vars);
     if (keys.length) css += `:root {\n${keys.map(k => `  ${k}: ${vars[k]};`).join('\n')}\n}\n`;
+    // кольори окремих текстів: діють лише у «своєму» пості (canvas з data-post)
+    Object.entries(sortTexts(state.texts)).forEach(([post, o]) => Object.entries(o).forEach(([k, c]) => {
+      css += `.canvas[data-post="${post}"] [data-t="${k}"] { color: ${c}; }\n`;
+    }));
     return css;
+  }
+
+  /* ── Кольори окремих текстів поста ── */
+  const toHex = c => { const m = c.match(/\d+(\.\d+)?/g); return m ? '#' + m.slice(0, 3).map(x => (+x).toString(16).padStart(2, '0')).join('').toUpperCase() : '#000000'; };
+  function setText(post, key, hex, base) {
+    state.texts[post] = state.texts[post] || {};
+    if (!hex || hex === base) delete state.texts[post][key]; else state.texts[post][key] = hex;
+    if (!Object.keys(state.texts[post]).length) delete state.texts[post];
+    changed();
+  }
+  // таблиця кольорів для текстів поста, відкритого в прев'ю (елементи з data-t)
+  function renderTextColors() {
+    const box = $('#textcolors'); if (!box) return;
+    const p = previews[+pv.value], doc = frame.contentDocument;
+    const canvas = p && p.id && doc && doc.querySelector(`.canvas[data-post="${p.id}"]`);
+    const items = canvas ? [...canvas.querySelectorAll('[data-t]')] : [];
+    if (!items.length) {
+      box.innerHTML = `<p class="ed-hint">${p && p.id ? 'У цьому пості тексти ще не позначені для окремого фарбування.' : 'Оберіть у прев\'ю готовий пост — тут з\'являться його тексти.'}</p>`;
+      return;
+    }
+    const own = state.texts[p.id] || {};
+    box.innerHTML = items.map(el => {
+      const k = el.dataset.t, label = el.dataset.label || k;
+      const sample = el.innerText.replace(/\s+/g, ' ').trim();
+      // базовий колір = колір без окремого правила: на мить знімаємо data-t і читаємо колір
+      el.removeAttribute('data-t'); const base = toHex(getComputedStyle(el).color); el.setAttribute('data-t', k);
+      const v = own[k] || base;
+      return `<div class="ctl tcl${own[k] ? ' is-changed' : ''}" data-key="${k}" data-base="${base}" title="${sample.replace(/"/g, '&quot;')}">
+        <input type="color" value="${v.toLowerCase()}" aria-label="${label}"><input type="text" class="hex" value="${v}" maxlength="7" spellcheck="false" aria-label="${label} HEX">
+        <span class="lbl">${label}<small>${sample}</small></span>${undoBtn}</div>`;
+    }).join('');
+  }
+  const tcBox = $('#textcolors');
+  if (tcBox) {
+    tcBox.addEventListener('input', e => {
+      e.stopPropagation();
+      const t = e.target, row = t.closest('.tcl'); if (!row) return;
+      const p = previews[+pv.value]; if (!p || !p.id) return;
+      let v = t.type === 'color' ? t.value.toUpperCase() : t.value.trim().toUpperCase();
+      if (v && v[0] !== '#') v = '#' + v;
+      const ok = /^#[0-9A-F]{6}$/.test(v);
+      if (t.classList.contains('hex')) { t.classList.toggle('is-bad', !ok); if (!ok) return; row.querySelector('input[type=color]').value = v.toLowerCase(); }
+      else row.querySelector('.hex').value = v;
+      setText(p.id, row.dataset.key, v, row.dataset.base);
+      row.classList.toggle('is-changed', v !== row.dataset.base);
+    });
+    tcBox.addEventListener('click', e => {
+      const b = e.target.closest('.undo'); if (!b) return;
+      e.stopPropagation();
+      const p = previews[+pv.value], row = b.closest('.tcl');
+      setText(p.id, row.dataset.key, null, row.dataset.base);
+      renderTextColors();
+    });
   }
 
   /* ── Панель ── */
@@ -175,6 +246,7 @@
       const sample = el.querySelector('.role__sample');
       sample.style.fontFamily = v.family ? stackFor(v.family) : def(r.v);
       sample.style.fontWeight = r.weight ? v.weight : 400;
+      sample.style.fontStyle = v.family ? styleOf(v.family) : '';
       if (r.id === 'display') sample.style.textTransform = cur('--at-post-display-case');
       if (r.id === 'script') sample.style.fontVariationSettings = '"opsz" 36';
       // Підказки: (1) роль не використовується у відкритому пості; (2) у тексті є кирилиця, якої немає у шрифті
@@ -227,7 +299,7 @@
   /* ── Прев'ю ── */
   const frame = $('#frame'), stage = $('#stage'), pv = $('#pv');
   const previews = [
-    ...(window.POSTS || []).map(p => ({ label: `Пост · ${p.title}`, src: `../posts/${p.id}.html`, w: p.w, h: p.h })),
+    ...(window.POSTS || []).map(p => ({ label: `Пост · ${p.title}`, src: `../posts/${p.id}.html`, w: p.w, h: p.h, id: p.id })),
     { label: 'Дизайн-система · Пости', src: '../index.html#posts' },
     { label: 'Дизайн-система · Карусель', src: '../index.html#carousel' },
     { label: 'Дизайн-система · Stories', src: '../index.html#stories' },
@@ -255,6 +327,124 @@
     let st = doc.getElementById('ed-live');
     if (!st) { st = doc.createElement('style'); st.id = 'ed-live'; doc.head.appendChild(st); }
     st.textContent = buildCss(true);
+  }
+  /* ── Редагування текстів прямо в прев'ю ──
+     У готовому пості кожен текст стає редагованим: клік — і пишіть. «Зберегти» записує
+     полотно (.canvas) у posts/<id>.html. Шаблони дизайн-системи так не редагуються. */
+  function enableEditing() {
+    const p = previews[+pv.value], doc = frame.contentDocument;
+    postEdit.id = null; postEdit.canvas = null; postEdit.dirty = false;
+    if (!p || !p.id || !doc) return;
+    const canvas = doc.querySelector('.canvas'); if (!canvas) return;
+    postEdit.id = p.id; postEdit.canvas = canvas;
+    const st = doc.createElement('style'); st.id = 'ed-edit';
+    st.textContent = '[data-edit]{cursor:text;outline:none}[data-edit]:hover{outline:3px dashed rgba(179,18,29,.6);outline-offset:8px}[data-edit]:focus{outline:3px solid #B3121D;outline-offset:8px}.ed-move [data-edit]{cursor:move;user-select:none}.ed-move [data-edit]:focus{outline:none}.ed-move [data-edit].ed-sel{outline:3px solid #B3121D;outline-offset:8px;background:rgba(179,18,29,.08)}';
+    doc.head.appendChild(st);
+    canvas.querySelectorAll('*').forEach(el => {
+      if (![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) return;
+      el.setAttribute('contenteditable', 'plaintext-only'); el.setAttribute('data-edit', ''); el.spellcheck = false;
+    });
+    canvas.addEventListener('input', () => { postEdit.dirty = true; setStatus('Є незбережені зміни', true); });
+    setupMove(doc, canvas);
+    applyMode();
+    canvas.addEventListener('focusout', () => syncSamples());
+    // вставка — лише простий текст
+    canvas.addEventListener('paste', e => { e.preventDefault(); doc.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain')); });
+  }
+  /* ── Переміщення текстів ──
+     Режим «✥ Переміщення»: клік — виділити напис, Shift+клік — додати/прибрати з виділення,
+     тягнути мишкою — рухати всі виділені; стрілки — на 1 px, Shift+стрілки — на 10 px; Esc — зняти виділення.
+     Зсув зберігається в пості як CSS translate (верстка шаблону лишається, текст лише зміщується). */
+  let editMode = 'text';
+  const sel = new Set();
+  const getXY = el => { const p = (el.style.translate || '').match(/-?\d+(\.\d+)?/g) || []; return [+(p[0] || 0), +(p[1] || 0)]; };
+  const setXY = (el, x, y) => { x = Math.round(x); y = Math.round(y); el.style.translate = (x || y) ? `${x}px ${y}px` : ''; if (!el.getAttribute('style')) el.removeAttribute('style'); };
+  const markMoved = () => { postEdit.dirty = true; setStatus('Є незбережені зміни', true); updateMoveInfo(); };
+  function clearSel() { sel.forEach(el => el.classList.remove('ed-sel')); sel.clear(); updateMoveInfo(); }
+  function updateMoveInfo() {
+    const info = $('#move-info'); if (!info) return;
+    if (editMode !== 'move') { info.textContent = ''; return; }
+    if (!sel.size) { info.textContent = 'Клікніть на напис у прев\'ю, щоб виділити. Shift+клік — кілька.'; return; }
+    const [x, y] = getXY([...sel][0]);
+    info.textContent = `Виділено: ${sel.size}` + (sel.size === 1 ? ` · зсув ${x}, ${y} px` : '');
+  }
+  function setupMove(doc, canvas) {
+    sel.clear();
+    let drag = null;
+    canvas.addEventListener('mousedown', e => {
+      if (editMode !== 'move') return;
+      const el = e.target.closest('[data-edit]');
+      e.preventDefault();
+      if (!el) { if (!e.shiftKey) clearSel(); return; }
+      if (e.shiftKey) { if (sel.has(el)) { sel.delete(el); el.classList.remove('ed-sel'); } else { sel.add(el); el.classList.add('ed-sel'); } updateMoveInfo(); if (!sel.has(el)) return; }
+      else if (!sel.has(el)) { clearSel(); sel.add(el); el.classList.add('ed-sel'); updateMoveInfo(); }
+      drag = { x: e.clientX, y: e.clientY, start: [...sel].map(n => [n, ...getXY(n)]), moved: false };
+      // фокус клавіатури — у прев'ю, щоб одразу працювали стрілки
+      if (document.activeElement && document.activeElement !== frame && document.activeElement.blur) document.activeElement.blur();
+      try { frame.contentWindow.focus(); } catch {}
+    }, true);
+    doc.addEventListener('mousemove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 3) return;
+      drag.moved = true;
+      drag.start.forEach(([n, x, y]) => setXY(n, x + dx, y + dy));
+      updateMoveInfo();
+    });
+    doc.addEventListener('mouseup', () => { if (drag && drag.moved) markMoved(); drag = null; });
+    // стрілки працюють і коли фокус у прев'ю, і коли на сторінці редактора
+    doc.addEventListener('keydown', nudgeKey);
+  }
+  function nudgeKey(e) {
+    if (editMode !== 'move' || !sel.size) return;
+    // у полях панелі (HEX, числа, коміт) стрілки лишаємо полям
+    const t = e.target; if (t && t.ownerDocument === document && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    if (e.key === 'Escape') { clearSel(); return; }
+    const step = e.shiftKey ? 10 : 1;
+    const d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
+    if (!d) return;
+    e.preventDefault();
+    sel.forEach(n => { const [x, y] = getXY(n); setXY(n, x + d[0], y + d[1]); });
+    markMoved();
+  }
+  document.addEventListener('keydown', nudgeKey);
+  function applyMode() {
+    const doc = frame.contentDocument;
+    document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.mode === editMode));
+    if (doc && postEdit.canvas) {
+      doc.documentElement.classList.toggle('ed-move', editMode === 'move');
+      postEdit.canvas.querySelectorAll('[data-edit]').forEach(el => el.setAttribute('contenteditable', editMode === 'text' ? 'plaintext-only' : 'false'));
+      if (editMode === 'text') clearSel(); else { doc.getSelection().removeAllRanges(); doc.activeElement && doc.activeElement.blur && doc.activeElement.blur(); frame.focus(); }
+    }
+    updateMoveInfo();
+  }
+  document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { editMode = b.dataset.mode; applyMode(); }));
+  const resetBtn = $('#move-reset');
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    const list = sel.size ? [...sel] : (postEdit.canvas ? [...postEdit.canvas.querySelectorAll('[data-edit]')] : []);
+    let any = false; list.forEach(n => { if (n.style.translate) { setXY(n, 0, 0); any = true; } });
+    if (any) markMoved();
+  });
+  // чисте полотно для збереження: без службових атрибутів; переноси рядка → <br>
+  function postHtml() {
+    const c = postEdit.canvas.cloneNode(true);
+    c.querySelectorAll('.ed-sel').forEach(el => { el.classList.remove('ed-sel'); if (!el.className) el.removeAttribute('class'); });
+    c.querySelectorAll('[class=""]').forEach(el => el.removeAttribute('class')); // після зняття виділення лишається порожній class
+    c.querySelectorAll('[data-edit]').forEach(el => {
+      el.removeAttribute('contenteditable'); el.removeAttribute('data-edit'); el.removeAttribute('spellcheck');
+      [...el.childNodes].forEach(n => {
+        if (n.nodeType !== 3 || !n.nodeValue.includes('\n')) return;
+        const parts = n.nodeValue.split('\n'), frag = n.ownerDocument.createDocumentFragment();
+        parts.forEach((s, i) => { if (i) frag.appendChild(n.ownerDocument.createElement('br')); frag.appendChild(n.ownerDocument.createTextNode(s)); });
+        n.replaceWith(frag);
+      });
+    });
+    return c.outerHTML;
+  }
+  async function savePost() {
+    if (!postEdit.id || !postEdit.canvas) return;
+    await api('/api/post', JSON.stringify({ id: postEdit.id, html: postHtml() }));
+    postEdit.dirty = false;
   }
   /* Зразки шрифтів = справжні тексти з поста в прев'ю (оновлюються при кожному відкритті).
      Для сторінок дизайн-системи — тексти з розділу за якорем; чого немає — базовий зразок. */
@@ -289,9 +479,14 @@
       ex.textContent = list.length ? list.join(' · ') : 'у цьому пості немає — видно в шаблонах';
       ex.title = ex.textContent;
     });
+    renderTextColors();
   }
-  frame.addEventListener('load', () => { applyPreview(); syncSamples(); });
-  pv.addEventListener('change', showPreview);
+  frame.addEventListener('load', () => { applyPreview(); enableEditing(); syncSamples(); });
+  pv.addEventListener('change', async () => {
+    // перед перемиканням прев'ю зберігаємо змінені тексти поточного поста
+    if (postEdit.dirty) { try { await savePost(); } catch (err) { show(String(err.message || err)); } }
+    showPreview();
+  });
   new ResizeObserver(fit).observe(stage);
 
   /* ── Статус, збереження, рендер, коміт ── */
@@ -313,6 +508,7 @@
   const show = t => { log.hidden = false; log.textContent = t.trim(); };
   async function save() {
     setStatus('Зберігаю…');
+    if (postEdit.dirty) await savePost();
     await api('/api/theme', buildCss(false));
     saved = norm(state);
     setStatus('Збережено ✓');
@@ -333,7 +529,7 @@
     $('#commit-msg').value = '';
     setStatus('Версію зафіксовано ✓');
   }));
-  $('#btn-reset').addEventListener('click', () => { state = { vars: {}, fonts: {} }; renderPanel(); changed(); });
+  $('#btn-reset').addEventListener('click', () => { state = { vars: {}, fonts: {}, texts: {} }; renderPanel(); changed(); });
   addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); run(save)(); } });
   addEventListener('beforeunload', e => { if (dirty()) { e.preventDefault(); e.returnValue = ''; } });
 
@@ -343,8 +539,8 @@
       const t = await (await fetch('../theme.css', { cache: 'no-store' })).text();
       const m = t.match(/editor-state:\s*(\{.*\})\s*\*\//);
       const s = m ? JSON.parse(m[1]) : {};
-      state = { vars: s.vars || {}, fonts: s.fonts || {} };
-    } catch { state = { vars: {}, fonts: {} }; }
+      state = { vars: s.vars || {}, fonts: s.fonts || {}, texts: s.texts || {} };
+    } catch { state = { vars: {}, fonts: {}, texts: {} }; }
     saved = norm(state);
     renderPanel();
     showPreview();

@@ -94,7 +94,7 @@
    Script  — Ballet           (латиниця; кирилиця → Cormorant Garamond як запасний)
    Script 2 — Imperial Script (вмикається в редакторі; кирилиця → Cormorant Garamond)
    Дозволений набір шрифтів DS (2026-11-22): Cormorant Garamond Regular, Montserrat Bold,
-   Manrope, Vela Sans, Ballet, Imperial Script. Інших не додавати. */
+   Manrope, Vela Sans, Ballet, Imperial Script; + Cormorant Garamond Italic, Petit Formal Script (2026-11-23). Інших не додавати. */
 @font-face { font-family: "Vela Sans"; src: url("fonts/VelaSans-Light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
 
 :root {
@@ -157,6 +157,16 @@
 :is(.canvas, .post-type) .disc-circle { font-family: var(--at-post-display); font-size: calc(var(--at-post-size-display-l) * 0.54); }
 :is(.canvas, .post-type) .btn         { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); }
 :is(.canvas, .post-type) .hl-cover__title { font-family: var(--at-font-logo); font-size: calc(var(--at-post-size-logo) * 2.9); }
+/* Накреслення (прямий / курсив) — з редактора: шрифт «Cormorant Garamond Italic» вмикає курсив у своєму блоці */
+:is(.canvas, .post-type) :is(.t-display-xl, .t-display-l, .disc-circle) { font-style: var(--at-post-display-style, normal); }
+:is(.canvas, .post-type) :is(.t-h1, .t-h2, .t-h3) { font-style: var(--at-post-heading-style, normal); }
+:is(.canvas, .post-type) :is(.t-body-l, .t-body-m) { font-style: var(--at-post-body-style, normal); }
+:is(.canvas, .post-type) .t-caps-l { font-style: var(--at-post-caps-l-style, normal); }
+:is(.canvas, .post-type) :is(.t-caps-m, .t-caps-s, .price__name, .meta-row span, .badge, .counter, .btn) { font-style: var(--at-post-caption-style, normal); }
+:is(.canvas, .post-type) :is(.t-price, .price__value, .price-chip, .price__old) { font-style: var(--at-post-price-style, normal); }
+:is(.canvas, .post-type) :is(.t-h2-italic, .t-script-l, .italic) { font-style: var(--at-post-script-style, normal); }
+:is(.canvas, .post-type) .logo { font-style: var(--at-font-logo-style, normal); }
+:is(.canvas, .post-type) .hl-cover__title { font-style: var(--at-font-logo-style, italic); }
 /* .italic у постах = script-акцент (Ballet) */
 :is(.canvas, .post-type) .italic       { font-family: var(--at-post-script); font-style: normal; font-weight: 400; text-transform: none; letter-spacing: 0; }
 /* Ballet: мала x-висота і тонкі волосяні — беремо щільніший оптичний розмір, щоб читалось у стрічці */

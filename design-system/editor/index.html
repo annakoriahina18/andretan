@@ -8,7 +8,7 @@
 <!-- Приватний редактор теми. Відкривається лише через serve.ps1 за секретним ключем. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@300;400;500;600&family=Montserrat:wght@700&family=Ballet:opsz@16..72&family=Imperial+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Manrope:wght@300;400;500;600&family=Montserrat:wght@700&family=Ballet:opsz@16..72&family=Imperial+Script&family=Petit+Formal+Script&display=swap" rel="stylesheet">
 <link id="ed-fonts" rel="stylesheet" href="data:text/css,">
 <!-- лише tokens.css (без theme.css): звідси редактор бере базові значення -->
 <link rel="stylesheet" href="../tokens.css">
@@ -35,6 +35,7 @@
       <p class="ed-hint" id="move-info"></p>
       <p class="ed-hint"><b>Переміщення:</b> клік — виділити напис, Shift+клік — кілька, тягніть мишкою; стрілки — на 1 px, Shift+стрілки — на 10 px, Esc — зняти виділення.</p>
       <p class="ed-hint"><b>Текст можна змінити прямо в прев'ю:</b> клікніть на будь-який напис у пості й пишіть (Enter — новий рядок). Зберігається кнопкою «Зберегти».</p>
+      <p class="ed-hint"><b>Шрифт окремих слів або літер:</b> виділіть мишкою частину напису — над нею з'явиться панель шрифтів. «↺ Як у тексті» повертає шрифт напису.</p>
       <p class="ed-hint">Кожен текст відкритого поста можна пофарбувати окремо. Колір діє лише в цьому пості; ↺ повертає колір шаблону.</p>
       <div id="textcolors"></div>
     </section>
@@ -56,6 +57,11 @@
       <h2>Розміри тексту</h2>
       <p class="ed-hint">У пікселях для полотна 1080 px.</p>
       <div id="sizes"></div>
+    </section>
+    <section>
+      <h2>Відстань між літерами</h2>
+      <p class="ed-hint">У відсотках від розміру шрифту: 0 — без додаткового відступу, 10 — легкий простір, 30 — дуже розріджено.</p>
+      <div id="tracking"></div>
     </section>
     <section>
       <h2>Поля</h2>

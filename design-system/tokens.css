@@ -129,6 +129,10 @@
   --at-post-size-caps-s: 16px;
   --at-post-size-price: 30px;
   --at-post-size-logo: 44px;
+  /* Трекінг (відстань між літерами) у частках em — змінює редактор */
+  --at-post-track-caps-l: 0.08em;   /* Caps L */
+  --at-post-track-caption: 0.12em;  /* Caps M / S, мітки, кнопки, назви в цінах */
+  --at-post-track-logo: 0.12em;     /* логотип і сайт */
 }
 .canvas, .post-type { --at-font-body: var(--at-post-body); }
 
@@ -141,21 +145,21 @@
 :is(.canvas, .post-type) .t-script-l   { font: 400 var(--at-post-size-script-l)/1.0 var(--at-post-script); }
 :is(.canvas, .post-type) .t-body-l     { font: 400 var(--at-post-size-body-l)/1.45 var(--at-post-body); }
 :is(.canvas, .post-type) .t-body-m     { font: 400 var(--at-post-size-body-m)/1.45 var(--at-post-body); }
-:is(.canvas, .post-type) .t-caps-l     { font: var(--at-post-caps-l-weight) var(--at-post-size-caps-l)/1.2 var(--at-post-caps-l); letter-spacing: 0.2em; }
-:is(.canvas, .post-type) .t-caps-m     { font: var(--at-post-caption-weight) var(--at-post-size-caps-m)/1.2 var(--at-post-caption); letter-spacing: 0.22em; }
-:is(.canvas, .post-type) .t-caps-s     { font: var(--at-post-caption-weight) var(--at-post-size-caps-s)/1.2 var(--at-post-caption); letter-spacing: 0.26em; }
+:is(.canvas, .post-type) .t-caps-l     { font: var(--at-post-caps-l-weight) var(--at-post-size-caps-l)/1.2 var(--at-post-caps-l); letter-spacing: var(--at-post-track-caps-l); }
+:is(.canvas, .post-type) .t-caps-m     { font: var(--at-post-caption-weight) var(--at-post-size-caps-m)/1.2 var(--at-post-caption); letter-spacing: var(--at-post-track-caption); }
+:is(.canvas, .post-type) .t-caps-s     { font: var(--at-post-caption-weight) var(--at-post-size-caps-s)/1.2 var(--at-post-caption); letter-spacing: var(--at-post-track-caption); }
 :is(.canvas, .post-type) .t-price      { font: var(--at-post-price-weight) var(--at-post-size-price)/1.2 var(--at-post-price); letter-spacing: 0.02em; }
 :is(.canvas, .post-type) .price__value { font-size: var(--at-post-size-price); font-family: var(--at-post-price); }
 :is(.canvas, .post-type) .price-chip   { font-family: var(--at-post-price); font-weight: var(--at-post-price-weight); }
 :is(.canvas, .post-type) .price-chip   { font-size: calc(var(--at-post-size-price) * 1.13); }
 /* Компоненти всередині постів теж керуються з редактора — у постах немає тексту з фіксованим шрифтом */
-:is(.canvas, .post-type) .price__name { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); }
+:is(.canvas, .post-type) .price__name { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); letter-spacing: var(--at-post-track-caption); }
 :is(.canvas, .post-type) .price__old  { font-family: var(--at-post-price); font-size: calc(var(--at-post-size-price) * 0.87); }
-:is(.canvas, .post-type) :is(.meta-row span, .badge, .counter) { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-s); }
-:is(.canvas, .post-type) .logo        { font-size: var(--at-post-size-logo); }
+:is(.canvas, .post-type) :is(.meta-row span, .badge, .counter) { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-s); letter-spacing: var(--at-post-track-caption); }
+:is(.canvas, .post-type) .logo        { font-size: var(--at-post-size-logo); letter-spacing: var(--at-post-track-logo); margin-right: calc(-1 * var(--at-post-track-logo)); }
 :is(.canvas, .post-type) .logo--sm    { font-size: calc(var(--at-post-size-logo) * 0.59); }
 :is(.canvas, .post-type) .disc-circle { font-family: var(--at-post-display); font-size: calc(var(--at-post-size-display-l) * 0.54); }
-:is(.canvas, .post-type) .btn         { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); }
+:is(.canvas, .post-type) .btn         { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); letter-spacing: var(--at-post-track-caption); }
 :is(.canvas, .post-type) .hl-cover__title { font-family: var(--at-font-logo); font-size: calc(var(--at-post-size-logo) * 2.9); }
 /* Накреслення (прямий / курсив) — з редактора: шрифт «Cormorant Garamond Italic» вмикає курсив у своєму блоці */
 :is(.canvas, .post-type) :is(.t-display-xl, .t-display-l, .disc-circle) { font-style: var(--at-post-display-style, normal); }

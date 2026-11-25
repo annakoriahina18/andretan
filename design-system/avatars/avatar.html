@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uk"><head><meta charset="utf-8">
+<title>ANDRE TAN — аватарка Instagram</title>
+<!-- Аватарка 1080×1080: avatar.html?bg=white | beige | black. Wordmark ≈ 70% ширини — вписується в коло профілю. -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../theme.css">
+<style>
+  html,body{margin:0;width:1080px;height:1080px;overflow:hidden}
+  body{display:flex;align-items:center;justify-content:center;background:var(--bg)}
+  .mark{font:400 100px/1 var(--at-font-logo);letter-spacing:.30em;margin-right:-.30em;white-space:nowrap;color:var(--fg)}
+</style></head>
+<body><span class="mark" id="m">ANDRE TAN</span>
+<script>
+  const bg = new URLSearchParams(location.search).get('bg') || 'white';
+  const map = { white:['var(--at-surface-white)','var(--at-text-primary)'],
+                beige:['var(--at-surface-beige)','var(--at-text-primary)'],
+                black:['var(--at-surface-black)','var(--at-text-inverse)'] }[bg];
+  document.body.style.setProperty('--bg', map[0]); document.body.style.setProperty('--fg', map[1]);
+  document.fonts.ready.then(() => {
+    const m = document.getElementById('m');
+    const visible = m.getBoundingClientRect().width - parseFloat(getComputedStyle(m).fontSize) * .30; // без хвостового трекінгу
+    m.style.fontSize = (100 * 740 / visible) + 'px';  // видима ширина ≈ 740px
+  });
+</script></body></html>

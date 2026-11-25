@@ -133,3 +133,13 @@
 .safe-zones::after  { bottom: 0; height: var(--at-safe-story-bottom); }
 .safe-zones i { position: absolute; top: 0; bottom: 0; width: var(--at-margin-story); background: rgba(179,18,29,.07); }
 .safe-zones i:first-child { left: 0; } .safe-zones i:last-child { right: 0; }
+
+/* ── Шрифт фрагмента (слово чи літери, виділені в редакторі) ──
+   <span class="ff ff-..." data-ff="...">. Розмір, колір і трекінг — від тексту навколо. */
+.ff-montserrat      { font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-style: normal; }
+.ff-manrope         { font-family: "Manrope", "Helvetica Neue", Arial, sans-serif; font-style: normal; }
+.ff-cormorant       { font-family: "Cormorant Garamond", "Times New Roman", serif; font-weight: 400; font-style: normal; }
+.ff-cormorant-italic{ font-family: "Cormorant Garamond", "Times New Roman", serif; font-weight: 400; font-style: italic; }
+.ff-ballet          { font-family: "Ballet", "Cormorant Garamond", cursive; font-weight: 400; font-style: normal; }
+.ff-imperial        { font-family: "Imperial Script", "Cormorant Garamond", cursive; font-weight: 400; font-style: normal; }
+.ff-petit           { font-family: "Petit Formal Script", "Cormorant Garamond", cursive; font-weight: 400; font-style: normal; }

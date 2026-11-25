@@ -23,6 +23,8 @@
     ['price', 'Ціна', 16, 72, '.t-price, .price__value, .price-chip, .price__old'],
     ['logo', 'Логотип і назви хайлайтів', 16, 120, '.logo, .hl-cover__title'],
   ];
+  // трекінг — у сотих частках em (8 = 0.08em); 0 = літери без додаткового відступу
+  const TRACKS = [['--at-post-track-caps-l', 'Caps L — назви', 0, 40], ['--at-post-track-caption', 'Caps M / S, мітки, кнопки', 0, 40], ['--at-post-track-logo', 'Логотип і сайт', 0, 40]];
   const LAYOUT = [['--at-margin-feed', 'Поле поста', 24, 160], ['--at-margin-story', 'Поле Stories', 24, 160]];
 
   // Лише шрифти дизайн-системи (tokens.css): Cormorant Garamond Regular + Italic, Montserrat Bold, Petit Formal Script,
@@ -57,7 +59,8 @@
   const COLOR_VARS = COLOR_GROUPS.flatMap(([, ks]) => ks.map(k => `--at-${k}`));
   const SIZE_VARS = SIZES.map(([k]) => `--at-post-size-${k}`);
   const LAYOUT_VARS = LAYOUT.map(([n]) => n);
-  const PLAIN_VARS = [...COLOR_VARS, ...SIZE_VARS, ...LAYOUT_VARS, '--at-post-display-case'];
+  const TRACK_VARS = TRACKS.map(([n]) => n);
+  const PLAIN_VARS = [...COLOR_VARS, ...SIZE_VARS, ...LAYOUT_VARS, ...TRACK_VARS, '--at-post-display-case'];
 
   /* ── Стан ── */
   const fontMeta = n => FONTS.find(f => f.n === n);
@@ -223,6 +226,7 @@
 
     $('#sizes').innerHTML = SIZES.map(([k, label, min, max]) => rangeCtl(`--at-post-size-${k}`, label, min, max)).join('');
     $('#layout').innerHTML = LAYOUT.map(([n, label, min, max]) => rangeCtl(n, label, min, max)).join('');
+    $('#tracking').innerHTML = TRACKS.map(([n, label, min, max]) => rangeCtl(n, label, min, max, 'em')).join('');
     $('#caps').checked = cur('--at-post-display-case') !== 'none';
     ROLES.forEach(r => { const w = document.querySelector(`.role[data-role="${r.id}"] select.w`); if (w) w.disabled = !roleCur(r).family; });
     marks();
@@ -233,8 +237,9 @@
     const ws = !m ? [v.weight] : m.w.length === 1 ? [m.w[0]] : Array.from({ length: (m.w[1] - m.w[0]) / 100 + 1 }, (_, i) => m.w[0] + i * 100);
     return ws.map(w => `<option value="${w}" ${w === v.weight ? 'selected' : ''}>${w}</option>`).join('');
   }
-  function rangeCtl(n, label, min, max) {
-    const v = parseFloat(cur(n));
+  function rangeCtl(n, label, min, max, unit = 'px') {
+    const v = unit === 'em' ? Math.round(parseFloat(cur(n)) * 100) : parseFloat(cur(n));
+    if (unit === 'em') return `<div class="ctl ctl--range" data-var="${n}" data-unit="em"><span class="lbl">${label}</span><input type="range" min="${min}" max="${max}" step="1" value="${v}" aria-label="${label}"><input type="number" min="${min}" max="${max}" value="${v}" aria-label="${label}, сотих em"><span class="unit">%</span>${undoBtn}</div>`;
     return `<div class="ctl ctl--range" data-var="${n}"><span class="lbl">${label}</span><input type="range" min="${min}" max="${max}" step="1" value="${v}" aria-label="${label}"><input type="number" min="${min}" max="${max}" value="${v}" aria-label="${label}, px"><span class="unit">px</span>${undoBtn}</div>`;
   }
   function marks() {
@@ -276,7 +281,7 @@
       if (t.value === '') return;
       const other = ctl.querySelector(t.type === 'range' ? 'input[type=number]' : 'input[type=range]');
       other.value = t.value;
-      return setVar(n, `${Math.round(+t.value)}px`);
+      return setVar(n, ctl.dataset.unit === 'em' ? `${+(Math.round(+t.value) / 100).toFixed(2)}em` : `${Math.round(+t.value)}px`);
     }
   });
   panel.addEventListener('change', e => {
@@ -340,10 +345,13 @@
     const st = doc.createElement('style'); st.id = 'ed-edit';
     st.textContent = '[data-edit]{cursor:text;outline:none}[data-edit]:hover{outline:3px dashed rgba(179,18,29,.6);outline-offset:8px}[data-edit]:focus{outline:3px solid #B3121D;outline-offset:8px}.ed-move [data-edit]{cursor:move;user-select:none}.ed-move [data-edit]:focus{outline:none}.ed-move [data-edit].ed-sel{outline:3px solid #B3121D;outline-offset:8px;background:rgba(179,18,29,.08)}';
     doc.head.appendChild(st);
+    // напис = елемент із власним текстом (або зі шматками .ff усередині); вкладені .ff — частина напису, не окремий
     canvas.querySelectorAll('*').forEach(el => {
-      if (![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) return;
+      if (el.matches('[data-ff]') || (el.parentElement && el.parentElement.closest('[data-edit]'))) return;
+      if (![...el.childNodes].some(n => (n.nodeType === 3 && n.textContent.trim()) || (n.nodeType === 1 && n.matches('[data-ff]')))) return;
       el.setAttribute('contenteditable', 'plaintext-only'); el.setAttribute('data-edit', ''); el.spellcheck = false;
     });
+    doc.addEventListener('selectionchange', placeFfBar);
     canvas.addEventListener('input', () => { postEdit.dirty = true; setStatus('Є незбережені зміни', true); });
     setupMove(doc, canvas);
     applyMode();
@@ -408,7 +416,97 @@
     markMoved();
   }
   document.addEventListener('keydown', nudgeKey);
+
+  /* ── Шрифт виділених слів або літер ──
+     Режим «✎ Текст»: виділіть мишкою частину напису — над нею з'явиться панель шрифтів.
+     Шматок стає <span class="ff ff-<ключ>" data-ff="<ключ>"> (класи — у components.css);
+     розмір, колір і трекінг лишаються від напису. «↺ Як у тексті» прибирає окремий шрифт. */
+  const FF = [ // [ключ → клас ff-<ключ>, назва з FONTS]
+    ['montserrat', 'Montserrat'], ['manrope', 'Manrope'], ['cormorant', 'Cormorant Garamond'], ['cormorant-italic', 'Cormorant Garamond Italic'],
+    ['ballet', 'Ballet'], ['imperial', 'Imperial Script'], ['petit', 'Petit Formal Script'],
+  ];
+  const ffBar = document.createElement('div'); ffBar.className = 'ed-ffbar'; ffBar.hidden = true;
+  ffBar.innerHTML = '<span class="ed-ffbar__t">Шрифт виділеного</span>' + FF.map(([k, n]) => {
+    const m = fontMeta(n);
+    return `<button type="button" data-ff="${k}" title="${n}" style="font-family:'${famOf(m)}';font-style:${m.ital ? 'italic' : 'normal'};font-weight:${m.w[0] === 700 ? 700 : 400}">${n.replace('Cormorant Garamond', 'Cormorant')}</button>`;
+  }).join('') + '<button type="button" data-ff="" class="ed-ffbar__reset" title="Прибрати окремий шрифт — як у всьому написі">↺ Як у тексті</button>';
+  document.body.appendChild(ffBar);
+  ffBar.addEventListener('mousedown', e => e.preventDefault()); // не знімати виділення в прев'ю
+  ffBar.addEventListener('click', e => { const b = e.target.closest('button'); if (b) applyFf(b.dataset.ff); });
+  let ffRange = null;
+  const elOf = n => n && (n.nodeType === 1 ? n : n.parentElement);
+  function ffHost() {
+    const doc = frame.contentDocument; if (!doc || !postEdit.canvas || editMode !== 'text') return null;
+    const s = doc.getSelection(); if (!s || !s.rangeCount || s.isCollapsed) return null;
+    const r = s.getRangeAt(0);
+    const a = elOf(r.startContainer)?.closest('[data-edit]'), b = elOf(r.endContainer)?.closest('[data-edit]');
+    return a && a === b && postEdit.canvas.contains(a) && r.toString().trim() ? { host: a, range: r } : null;
+  }
+  function placeFfBar() {
+    const h = ffHost();
+    if (!h) { ffBar.hidden = true; ffRange = null; return; }
+    ffRange = h.range.cloneRange();
+    const rr = h.range.getBoundingClientRect(), fr = frame.getBoundingClientRect(), s = fr.width / frame.offsetWidth;
+    ffBar.hidden = false;
+    const bw = ffBar.offsetWidth, bh = ffBar.offsetHeight;
+    let x = fr.left + (rr.left + rr.width / 2) * s - bw / 2, y = fr.top + rr.top * s - bh - 12;
+    if (y < 8) y = fr.top + rr.bottom * s + 12;
+    ffBar.style.left = Math.max(8, Math.min(innerWidth - bw - 8, x)) + 'px'; ffBar.style.top = y + 'px';
+  }
+  // позиції в тексті напису (лише текстові вузли) ↔ Range — щоб після перебудови знову виділити той самий шматок
+  const textNodes = host => { const w = host.ownerDocument.createTreeWalker(host, 4), a = []; while (w.nextNode()) a.push(w.currentNode); return a; };
+  function rangeAt(host, from, to) {
+    const r = host.ownerDocument.createRange(); let pos = 0, started = false;
+    for (const n of textNodes(host)) {
+      const len = n.nodeValue.length;
+      if (!started && from <= pos + len) { r.setStart(n, from - pos); started = true; }
+      if (started && to <= pos + len) { r.setEnd(n, to - pos); return r; }
+      pos += len;
+    }
+    return null;
+  }
+  // напис → рівна послідовність: текст і <br> поза шматками, сусідні шматки з однаковим шрифтом зливаються
+  function flattenFf(host) {
+    const doc = host.ownerDocument, runs = [];
+    const w = doc.createTreeWalker(host, 1 | 4);
+    while (w.nextNode()) {
+      const n = w.currentNode;
+      if (n.nodeType === 1 && n.tagName !== 'BR') continue;
+      if (n.nodeType === 3 && !n.nodeValue) continue;
+      const f = n.parentElement.closest('[data-ff]'), k = f && host.contains(f) ? f.getAttribute('data-ff') : '';
+      const last = runs[runs.length - 1];
+      if (last && last.k === k) last.nodes.push(n); else runs.push({ k, nodes: [n] });
+    }
+    const out = [];
+    runs.forEach(({ k, nodes }) => {
+      const copy = nodes.map(n => n.nodeType === 3 ? doc.createTextNode(n.nodeValue) : doc.createElement('br'));
+      if (!k) { out.push(...copy); return; }
+      const s = doc.createElement('span'); s.className = `ff ff-${k}`; s.setAttribute('data-ff', k); s.append(...copy); out.push(s);
+    });
+    host.replaceChildren(...out); host.normalize();
+  }
+  function applyFf(key) {
+    const doc = frame.contentDocument, r = ffRange; if (!doc || !r) return;
+    const host = elOf(r.startContainer)?.closest('[data-edit]'); if (!host) return;
+    const pre = doc.createRange(); pre.setStart(host, 0); pre.setEnd(r.startContainer, r.startOffset);
+    const from = pre.toString().length, to = from + r.toString().length;
+    const frag = r.extractContents();
+    frag.querySelectorAll('[data-ff]').forEach(s => s.replaceWith(...s.childNodes));
+    const wrap = doc.createElement('span'); wrap.setAttribute('data-ff', key); wrap.appendChild(frag);
+    r.insertNode(wrap);
+    // у написі є інша розмітка (не текст/br/шрифтові шматки) — не перебудовуємо, лише чистимо обгортку
+    if ([...host.querySelectorAll('*')].some(n => n.tagName !== 'BR' && !n.matches('span[data-ff]'))) {
+      if (key) wrap.className = `ff ff-${key}`; else wrap.replaceWith(...wrap.childNodes);
+    } else flattenFf(host);
+    const back = rangeAt(host, from, to);
+    if (back) { const s = doc.getSelection(); s.removeAllRanges(); s.addRange(back); }
+    postEdit.dirty = true; setStatus('Є незбережені зміни', true);
+    syncSamples(); placeFfBar();
+  }
+  addEventListener('resize', () => { ffBar.hidden = true; });
+
   function applyMode() {
+    if (editMode !== 'text') ffBar.hidden = true;
     const doc = frame.contentDocument;
     document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.mode === editMode));
     if (doc && postEdit.canvas) {
@@ -432,8 +530,9 @@
     c.querySelectorAll('[class=""]').forEach(el => el.removeAttribute('class')); // після зняття виділення лишається порожній class
     c.querySelectorAll('[data-edit]').forEach(el => {
       el.removeAttribute('contenteditable'); el.removeAttribute('data-edit'); el.removeAttribute('spellcheck');
-      [...el.childNodes].forEach(n => {
-        if (n.nodeType !== 3 || !n.nodeValue.includes('\n')) return;
+      const w = el.ownerDocument.createTreeWalker(el, 4), tn = []; while (w.nextNode()) tn.push(w.currentNode);
+      tn.forEach(n => {
+        if (!n.nodeValue.includes('\n')) return;
         const parts = n.nodeValue.split('\n'), frag = n.ownerDocument.createDocumentFragment();
         parts.forEach((s, i) => { if (i) frag.appendChild(n.ownerDocument.createElement('br')); frag.appendChild(n.ownerDocument.createTextNode(s)); });
         n.replaceWith(frag);
@@ -481,7 +580,7 @@
     });
     renderTextColors();
   }
-  frame.addEventListener('load', () => { applyPreview(); enableEditing(); syncSamples(); });
+  frame.addEventListener('load', () => { ffBar.hidden = true; ffRange = null; applyPreview(); enableEditing(); syncSamples(); });
   pv.addEventListener('change', async () => {
     // перед перемиканням прев'ю зберігаємо змінені тексти поточного поста
     if (postEdit.dirty) { try { await savePost(); } catch (err) { show(String(err.message || err)); } }

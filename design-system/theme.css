@@ -1,6 +1,6 @@
 /* ANDRE TAN — тема з редактора. Порожня = все як у tokens.css.
    Файл генерує редактор (editor/), вручну не редагуйте.
-   editor-state: {"vars":{"--at-margin-feed":"45px","--at-post-size-caps-l":"42px","--at-post-size-caps-m":"22px","--at-post-size-caps-s":"19px","--at-post-size-logo":"50px","--at-post-size-script":"66px","--at-red-600":"#C1121C"},"fonts":{"capsl":{"family":"Cormorant Garamond Italic","weight":600},"caption":{"family":"Manrope","weight":300},"logo":{"family":"Manrope","weight":400},"price":{"family":"Cormorant Garamond","weight":400}},"texts":{"bf-last-days-drop":{"title":"#000000"},"bf-last-days-story-bw":{"meta-1":"#000000","meta-3":"#000000","title":"#C1121C"},"cold-season-styling":{"site":"#FFFFFF","title":"#FFFFFF"}}} */
+   editor-state: {"vars":{"--at-margin-feed":"45px","--at-post-size-caps-l":"42px","--at-post-size-caps-m":"22px","--at-post-size-caps-s":"19px","--at-post-size-logo":"50px","--at-post-size-script":"66px","--at-red-600":"#C1121C"},"fonts":{"capsl":{"family":"Cormorant Garamond Italic","weight":600},"caption":{"family":"Manrope","weight":300},"logo":{"family":"Manrope","weight":400},"price":{"family":"Cormorant Garamond","weight":400}},"texts":{"bf-last-days-drop":{"title":"#000000"},"bf-last-days-story-bw":{"meta-1":"#000000","meta-3":"#000000","title":"#C1121C"},"bf-last-days-story-color":{"meta-1":"#000000","meta-3":"#000000","title":"#C1121C"},"cold-season-styling":{"site":"#FFFFFF","title":"#FFFFFF"}}} */
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Manrope:wght@300;400&display=swap");
 :root {
   --at-margin-feed: 45px;
@@ -23,6 +23,9 @@
   --at-font-logo-style: normal;
 }
 .canvas[data-post="bf-last-days-drop"] [data-t="title"] { color: #000000; }
+.canvas[data-post="bf-last-days-story-color"] [data-t="meta-1"] { color: #000000; }
+.canvas[data-post="bf-last-days-story-color"] [data-t="meta-3"] { color: #000000; }
+.canvas[data-post="bf-last-days-story-color"] [data-t="title"] { color: #C1121C; }
 .canvas[data-post="bf-last-days-story-bw"] [data-t="meta-1"] { color: #000000; }
 .canvas[data-post="bf-last-days-story-bw"] [data-t="meta-3"] { color: #000000; }
 .canvas[data-post="bf-last-days-story-bw"] [data-t="title"] { color: #C1121C; }

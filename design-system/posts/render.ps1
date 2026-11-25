@@ -1,8 +1,8 @@
 # Рендер готових постів у PNG через headless Microsoft Edge (Python/Node не потрібні).
 #   powershell -ExecutionPolicy Bypass -File posts/render.ps1            — усі пости з posts.js
-#   powershell -ExecutionPolicy Bypass -File posts/render.ps1 bf-last-days — один пост
+#   powershell -ExecutionPolicy Bypass -File posts/render.ps1 bf-last-days [ще-id ...] — один або кілька постів
 # Результат: posts/export/<id>.png у точному розмірі полотна.
-param([string[]]$Only)
+param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Only)
 $ErrorActionPreference = 'Stop'
 $dir = $PSScriptRoot
 $out = Join-Path $dir 'export'

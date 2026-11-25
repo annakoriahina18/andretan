@@ -1,6 +1,18 @@
 // Маніфест готових постів. Новий пост: додайте HTML у posts/, рядок сюди
 // і запустіть posts/render.ps1. Нові пости додаються зверху.
 window.POSTS = [
+  { id: 'bf-last-days-story', w: 1080, h: 1920,
+    title: 'Last Days of Black Friday Sale — Stories',
+    template: 'Story / Drop Announce Full',
+    campaign: 'Black Friday 2026',
+    date: '2026-11-25',
+    caption: 'LAST DAYS OF BLACK FRIDAY SALE\nЗнижки до −90%\nПо 30.11 в усій мережі магазинів ANDRE TAN та online на andretan.ua' },
+  { id: 'bf-last-days-story-bw', w: 1080, h: 1920,
+    title: 'Last Days of Black Friday Sale — Stories, ЧБ',
+    template: 'Story / Drop Announce Full',
+    campaign: 'Black Friday 2026',
+    date: '2026-11-25',
+    caption: 'LAST DAYS OF BLACK FRIDAY SALE\nЗнижки до −90%\nПо 30.11 в усій мережі магазинів ANDRE TAN та online на andretan.ua' },
   { id: 'cold-season-styling', w: 1080, h: 1920,
     title: 'Cold Season Styling',
     template: 'Story / Drop Title',

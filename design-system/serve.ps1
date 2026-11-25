@@ -94,6 +94,8 @@ while ($l.IsListening) {
             $msg = $msg -replace '[\r\n"]', ' '
             $out = & git -C $root add theme.css posts 2>&1 | Out-String
             $out += & git -C $root commit -m "$msg" -- theme.css posts 2>&1 | Out-String
+            # одразу на GitHub — галерея «Готові пости» на GitHub Pages оновлюється сама
+            $out += & git -C $root push 2>&1 | Out-String
             Send-Text $res 200 $out
           }
           default { Send-Text $res 404 'Not found' }

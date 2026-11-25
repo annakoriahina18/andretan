@@ -1,6 +1,12 @@
 // Маніфест готових постів. Новий пост: додайте HTML у posts/, рядок сюди
 // і запустіть posts/render.ps1. Нові пости додаються зверху.
 window.POSTS = [
+  { id: 'cold-season-looks-cover', w: 1080, h: 1920,
+    title: 'Cold Season Styling — Looks Cover',
+    template: 'Story / Looks Cover',
+    campaign: 'Cold Season',
+    date: '2026-11-25',
+    caption: 'COLD SEASON STYLING · andretan.ua' },
   { id: 'looks-cover-mirror', w: 1080, h: 1920,
     title: '5 looks from ANDRE TAN',
     template: 'Story / Looks Cover',

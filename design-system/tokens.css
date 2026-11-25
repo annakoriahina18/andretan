@@ -70,7 +70,7 @@
 }
 
 /* ── Text styles (розміри для полотна 1080px) ── */
-.t-display-xl   { font: 400 180px/0.90 var(--at-font-heading); letter-spacing: -0.02em; }
+.t-display-xl   { font: 400 180px/0.90 var(--at-font-heading); letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
 .t-display-l    { font: 400 128px/0.92 var(--at-font-heading); letter-spacing: -0.015em; }
 .t-h1           { font: 400 88px/1.00 var(--at-font-heading); letter-spacing: -0.01em; }
 .t-h2           { font: 400 60px/1.05 var(--at-font-heading); letter-spacing: -0.005em; }
@@ -107,6 +107,7 @@
   --at-post-caption: "Manrope", "Helvetica Neue", Arial, sans-serif;  /* Caps M / S — підписи, дати */
   --at-post-price: "Manrope", "Helvetica Neue", Arial, sans-serif;    /* ціни */
   --at-post-script: "Ballet", "Cormorant Garamond", cursive; /* Cormorant — лише для кирилиці, якої в Ballet немає */
+  --at-post-cover: "Cormorant Garamond", "Times New Roman", serif; /* Cover — контрастний серіф обкладинок сторіс */
 
   /* Товщини, регістр і розміри (полотно 1080px) — їх змінює редактор через theme.css */
   --at-post-display-weight: 700;
@@ -129,6 +130,8 @@
   --at-post-size-caps-s: 16px;
   --at-post-size-price: 30px;
   --at-post-size-logo: 44px;
+  --at-post-size-cover: 230px;     /* «5 looks» / «from» */
+  --at-post-size-cover-l: 156px;   /* велике «ANDRE TAN» на обкладинці */
   /* Трекінг (відстань між літерами) у частках em — змінює редактор */
   --at-post-track-caps-l: 0.08em;   /* Caps L */
   --at-post-track-caption: 0.12em;  /* Caps M / S, мітки, кнопки, назви в цінах */
@@ -138,7 +141,7 @@
 
 :is(.canvas, .post-type) .t-display-xl { font: var(--at-post-display-weight) var(--at-post-size-display-xl)/1.0 var(--at-post-display); letter-spacing: -0.02em; text-transform: var(--at-post-display-case); }
 :is(.canvas, .post-type) .t-display-l  { font: var(--at-post-display-weight) var(--at-post-size-display-l)/1.0 var(--at-post-display); letter-spacing: -0.015em; text-transform: var(--at-post-display-case); }
-:is(.canvas, .post-type) .t-h1         { font: var(--at-post-heading-weight) var(--at-post-size-h1)/1.05 var(--at-post-heading); letter-spacing: -0.02em; }
+:is(.canvas, .post-type) .t-h1         { font: var(--at-post-heading-weight) var(--at-post-size-h1)/1.05 var(--at-post-heading); letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
 :is(.canvas, .post-type) .t-h2         { font: var(--at-post-heading-weight) var(--at-post-size-h2)/1.10 var(--at-post-heading); letter-spacing: -0.01em; }
 :is(.canvas, .post-type) .t-h3         { font: var(--at-post-heading-weight) var(--at-post-size-h3)/1.15 var(--at-post-heading); letter-spacing: -0.005em; }
 :is(.canvas, .post-type) .t-h2-italic  { font: 400 var(--at-post-size-script)/1.05 var(--at-post-script); letter-spacing: 0; }
@@ -161,6 +164,11 @@
 :is(.canvas, .post-type) .disc-circle { font-family: var(--at-post-display); font-size: calc(var(--at-post-size-display-l) * 0.54); }
 :is(.canvas, .post-type) .btn         { font-family: var(--at-post-caption); font-weight: var(--at-post-caption-weight); font-size: var(--at-post-size-caps-m); letter-spacing: var(--at-post-track-caption); }
 :is(.canvas, .post-type) .hl-cover__title { font-family: var(--at-font-logo); font-size: calc(var(--at-post-size-logo) * 2.9); }
+/* Cover — серифні заголовки обкладинок сторіс: .t-cover (рядки), .t-cover-italic (курсивне слово), .t-cover-l (широкий напис великими) */
+:is(.canvas, .post-type) .t-cover   { font: 400 var(--at-post-size-cover)/0.86 var(--at-post-cover); letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
+:is(.canvas, .post-type) .t-cover-l { font: 400 var(--at-post-size-cover-l)/1 var(--at-post-cover); letter-spacing: 0; text-transform: uppercase; white-space: nowrap; }
+:is(.canvas, .post-type) :is(.t-cover, .t-cover-l) { font-style: var(--at-post-cover-style, normal); }
+:is(.canvas, .post-type) .t-cover.t-cover-italic { font-style: italic; }
 /* Накреслення (прямий / курсив) — з редактора: шрифт «Cormorant Garamond Italic» вмикає курсив у своєму блоці */
 :is(.canvas, .post-type) :is(.t-display-xl, .t-display-l, .disc-circle) { font-style: var(--at-post-display-style, normal); }
 :is(.canvas, .post-type) :is(.t-h1, .t-h2, .t-h3) { font-style: var(--at-post-heading-style, normal); }

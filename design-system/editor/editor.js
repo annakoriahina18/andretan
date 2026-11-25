@@ -22,6 +22,7 @@
     ['caps-l', 'Caps L', 12, 60, '.t-caps-l'], ['caps-m', 'Caps M', 10, 48, '.t-caps-m, .price__name, .btn'], ['caps-s', 'Caps S', 10, 40, '.t-caps-s, .meta-row span, .badge, .counter'],
     ['price', 'Ціна', 16, 72, '.t-price, .price__value, .price-chip, .price__old'],
     ['logo', 'Логотип і назви хайлайтів', 16, 120, '.logo, .hl-cover__title'],
+    ['cover', 'Cover — «5 looks»', 80, 360, '.t-cover'], ['cover-l', 'Cover — великий напис', 60, 260, '.t-cover-l'],
   ];
   // трекінг — у сотих частках em (8 = 0.08em); 0 = літери без додаткового відступу
   const TRACKS = [['--at-post-track-caps-l', 'Caps L — назви', 0, 40], ['--at-post-track-caption', 'Caps M / S, мітки, кнопки', 0, 40], ['--at-post-track-logo', 'Логотип і сайт', 0, 40]];
@@ -53,6 +54,7 @@
     { id: 'caption', v: '--at-post-caption', label: 'Caps M / S — підписи, назви товарів, мітки', weight: '--at-post-caption-weight', sample: 'ПІДПИС', sel: '.t-caps-m, .t-caps-s, .price__name, .meta-row span, .badge, .counter, .btn' },
     { id: 'price', v: '--at-post-price', label: 'Ціна', weight: '--at-post-price-weight', sample: '12 999 ₴', sel: '.t-price, .price__value, .price-chip, .price__old' },
     { id: 'script', v: '--at-post-script', label: 'Script — рукописний акцент', sample: 'new arrival', sel: '.t-script-l, .t-h2-italic, .italic' },
+    { id: 'cover', v: '--at-post-cover', label: 'Cover — серифні заголовки обкладинок сторіс', sample: '5 looks from', sel: '.t-cover, .t-cover-l' },
     { id: 'logo', v: '--at-font-logo', label: 'Логотип і назви хайлайтів', sample: 'ANDRE TAN', sel: '.logo, .hl-cover__title' },
   ];
 

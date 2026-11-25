@@ -1,6 +1,12 @@
 // Маніфест готових постів. Новий пост: додайте HTML у posts/, рядок сюди
 // і запустіть posts/render.ps1. Нові пости додаються зверху.
 window.POSTS = [
+  { id: 'looks-cover-mirror', w: 1080, h: 1920,
+    title: '5 looks from ANDRE TAN',
+    template: 'Story / Looks Cover',
+    campaign: '5 looks',
+    date: '2026-11-25',
+    caption: '5 looks from ANDRE TAN · andretan.ua' },
   { id: 'bf-last-days-story-color', w: 1080, h: 1920,
     title: 'Last Days of Black Friday Sale — Stories, колір',
     template: 'Story / Drop Announce Full',
